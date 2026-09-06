@@ -159,8 +159,7 @@ export default function Contact() {
               </small>
 
               <p>
-                info@savaibhaojmarble.com
-                
+                Info.shekharexim@gmail.com
               </p>
             </div>
 
