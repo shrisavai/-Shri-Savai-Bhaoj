@@ -9,7 +9,8 @@ const emptyProduct = {
   finish: "",
   price: "",
   description: "",
-  featured: false
+  featured: false,
+  imageUrl: ""
 };
 
 const emptyCategory = {
@@ -25,8 +26,6 @@ export default function AdminDashboard() {
 
   const [product, setProduct] = useState(emptyProduct);
   const [category, setCategory] = useState(emptyCategory);
-
-  const [productFiles, setProductFiles] = useState([]);
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -72,30 +71,33 @@ export default function AdminDashboard() {
       return;
     }
 
-    if (!productFiles.length) {
-      setError("Please select at least one product image.");
+    if (!product.imageUrl.trim()) {
+      setError("Please enter a product image URL.");
       return;
     }
 
     try {
       setLoading(true);
 
-      const fd = new FormData();
+      const data = {
+        name: product.name,
+        category: product.category,
+        origin: product.origin,
+        finish: product.finish,
+        price: product.price,
+        description: product.description,
+        featured: product.featured,
+        images: [product.imageUrl.trim()]
+      };
 
-      Object.entries(product).forEach(([key, value]) => {
-        fd.append(key, value);
-      });
-
-      Array.from(productFiles).forEach((file) => {
-        fd.append("images", file);
-      });
-
-      await api.post("/products", fd, {
-        headers: headers()
+      await api.post("/products", data, {
+        headers: {
+          ...headers(),
+          "Content-Type": "application/json"
+        }
       });
 
       setProduct(emptyProduct);
-      setProductFiles([]);
 
       setMessage("Product added successfully.");
 
@@ -199,9 +201,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#f3f1ec] text-[#1c1b18]">
 
-      {/* =====================================================
-          SIDEBAR
-      ====================================================== */}
+      {/* ================= SIDEBAR ================= */}
 
       <aside
         className="
@@ -211,8 +211,6 @@ export default function AdminDashboard() {
           lg:flex
         "
       >
-
-        {/* Brand */}
 
         <div className="px-7 pt-8">
 
@@ -246,8 +244,6 @@ export default function AdminDashboard() {
           </div>
 
         </div>
-
-        {/* Navigation */}
 
         <div className="mt-12 px-4">
 
@@ -313,8 +309,6 @@ export default function AdminDashboard() {
 
         </div>
 
-        {/* Bottom */}
-
         <div className="mt-auto px-5 pb-6">
 
           <div className="mb-4 border-t border-white/[0.08] pt-4">
@@ -350,10 +344,7 @@ export default function AdminDashboard() {
 
       </aside>
 
-
-      {/* =====================================================
-          MOBILE NAV
-      ====================================================== */}
+      {/* ================= MOBILE NAV ================= */}
 
       <div
         className="
@@ -431,16 +422,13 @@ export default function AdminDashboard() {
 
       </div>
 
-
-      {/* =====================================================
-          MAIN
-      ====================================================== */}
+      {/* ================= MAIN ================= */}
 
       <main className="lg:ml-[260px]">
 
         <div className="mx-auto max-w-[1450px] px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
 
-          {/* Header */}
+          {/* HEADER */}
 
           <header className="mb-8 flex items-start justify-between">
 
@@ -475,10 +463,7 @@ export default function AdminDashboard() {
 
           </header>
 
-
-          {/* =================================================
-              STATS
-          ================================================== */}
+          {/* STATS */}
 
           <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
 
@@ -527,10 +512,7 @@ export default function AdminDashboard() {
 
           </div>
 
-
-          {/* =================================================
-              ALERTS
-          ================================================== */}
+          {/* ALERTS */}
 
           {message && (
             <div
@@ -542,7 +524,6 @@ export default function AdminDashboard() {
                 text-xs text-[#53624d]
               "
             >
-
               <span
                 className="
                   flex h-5 w-5
@@ -554,7 +535,6 @@ export default function AdminDashboard() {
               </span>
 
               {message}
-
             </div>
           )}
 
@@ -568,7 +548,6 @@ export default function AdminDashboard() {
                 text-xs text-[#875048]
               "
             >
-
               <span
                 className="
                   flex h-5 w-5
@@ -580,19 +559,13 @@ export default function AdminDashboard() {
               </span>
 
               {error}
-
             </div>
           )}
 
-
-          {/* =================================================
-              PRODUCTS
-          ================================================== */}
+          {/* ================= PRODUCTS ================= */}
 
           {tab === "products" && (
             <>
-
-              {/* Add Product */}
 
               <section
                 className="
@@ -624,12 +597,11 @@ export default function AdminDashboard() {
 
                 </div>
 
-
                 <form onSubmit={saveProduct}>
 
                   <div className="grid gap-5 md:grid-cols-2">
 
-                    {/* Product Name */}
+                    {/* NAME */}
 
                     <div>
 
@@ -662,8 +634,7 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Category */}
+                    {/* CATEGORY */}
 
                     <div>
 
@@ -710,8 +681,7 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Origin */}
+                    {/* ORIGIN */}
 
                     <div>
 
@@ -742,8 +712,7 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Finish */}
+                    {/* FINISH */}
 
                     <div>
 
@@ -774,8 +743,7 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Price */}
+                    {/* PRICE */}
 
                     <div>
 
@@ -806,75 +774,67 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Images */}
+                    {/* IMAGE URL */}
 
                     <div>
 
                       <label className="mb-2 block text-[9px] font-bold uppercase tracking-wider text-[#68645d]">
-                        Product images
+                        Product image URL
                       </label>
 
-                      <label
+                      <input
+                        required
+                        type="url"
+                        value={product.imageUrl}
+                        onChange={(e) =>
+                          setProduct({
+                            ...product,
+                            imageUrl: e.target.value
+                          })
+                        }
+                        placeholder="https://example.com/marble.jpg"
                         className="
-                          flex h-12
-                          cursor-pointer
-                          items-center gap-3
-                          border border-dashed
-                          border-[#c9c4ba]
-                          bg-white px-3
-                          transition
-                          hover:border-[#8e8066]
+                          h-12 w-full
+                          border border-[#d8d4cb]
+                          bg-white px-4
+                          text-xs outline-none
+                          placeholder:text-[#aaa69f]
+                          focus:border-[#8e8066]
+                          focus:ring-2
+                          focus:ring-[#8e8066]/10
                         "
-                      >
-
-                        <span
-                          className="
-                            flex h-7 w-7
-                            items-center justify-center
-                            border border-[#ded9cf]
-                            text-sm text-[#8e8066]
-                          "
-                        >
-                          ↑
-                        </span>
-
-                        <span
-                          className="
-                            min-w-0 flex-1 truncate
-                            text-[10px]
-                            text-[#68645d]
-                          "
-                        >
-                          {productFiles.length
-                            ? `${productFiles.length} image${
-                                productFiles.length > 1
-                                  ? "s"
-                                  : ""
-                              } selected`
-                            : "Choose product images"}
-                        </span>
-
-                        <input
-                          type="file"
-                          multiple
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) =>
-                            setProductFiles(
-                              e.target.files
-                            )
-                          }
-                        />
-
-                      </label>
+                      />
 
                     </div>
 
                   </div>
 
+                  {/* IMAGE PREVIEW */}
 
-                  {/* Description */}
+                  {product.imageUrl && (
+                    <div className="mt-5">
+
+                      <label className="mb-2 block text-[9px] font-bold uppercase tracking-wider text-[#68645d]">
+                        Image preview
+                      </label>
+
+                      <div className="h-48 w-full overflow-hidden border border-[#d8d4cb] bg-[#e4e0d7] sm:w-72">
+
+                        <img
+                          src={product.imageUrl}
+                          alt="Preview"
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                        />
+
+                      </div>
+
+                    </div>
+                  )}
+
+                  {/* DESCRIPTION */}
 
                   <div className="mt-5">
 
@@ -907,8 +867,7 @@ export default function AdminDashboard() {
 
                   </div>
 
-
-                  {/* Featured */}
+                  {/* FEATURED */}
 
                   <div className="mt-5">
 
@@ -940,8 +899,7 @@ export default function AdminDashboard() {
 
                   </div>
 
-
-                  {/* Footer */}
+                  {/* FOOTER */}
 
                   <div
                     className="
@@ -956,7 +914,7 @@ export default function AdminDashboard() {
                   >
 
                     <p className="text-[9px] text-[#99958d]">
-                      Up to 12 images can be uploaded.
+                      Use a direct image URL ending in .jpg, .jpeg, .png or .webp.
                     </p>
 
                     <button
@@ -996,8 +954,7 @@ export default function AdminDashboard() {
 
               </section>
 
-
-              {/* Product List */}
+              {/* PRODUCT LIST */}
 
               <section
                 className="
@@ -1034,7 +991,6 @@ export default function AdminDashboard() {
 
                 </div>
 
-
                 {products.length === 0 ? (
 
                   <div className="px-5 py-16 text-center">
@@ -1068,8 +1024,6 @@ export default function AdminDashboard() {
                           sm:flex-row sm:items-center
                         "
                       >
-
-                        {/* Image */}
 
                         <div
                           className="
@@ -1107,9 +1061,6 @@ export default function AdminDashboard() {
                           )}
 
                         </div>
-
-
-                        {/* Info */}
 
                         <div className="min-w-0 flex-1">
 
@@ -1171,15 +1122,9 @@ export default function AdminDashboard() {
 
                         </div>
 
-
-                        {/* Price */}
-
                         <div className="text-xs text-[#756d5e]">
                           {p.price || "—"}
                         </div>
-
-
-                        {/* Delete */}
 
                         <button
                           onClick={() =>
@@ -1214,15 +1159,10 @@ export default function AdminDashboard() {
             </>
           )}
 
-
-          {/* =================================================
-              CATEGORIES
-          ================================================== */}
+          {/* ================= CATEGORIES ================= */}
 
           {tab === "categories" && (
             <>
-
-              {/* Add Category */}
 
               <section
                 className="
@@ -1253,12 +1193,9 @@ export default function AdminDashboard() {
 
                 </div>
 
-
                 <form onSubmit={saveCategory}>
 
                   <div className="grid gap-5 md:grid-cols-2">
-
-                    {/* Name */}
 
                     <div>
 
@@ -1290,9 +1227,6 @@ export default function AdminDashboard() {
 
                     </div>
 
-
-                    {/* Description */}
-
                     <div>
 
                       <label className="mb-2 block text-[9px] font-bold uppercase tracking-wider text-[#68645d]">
@@ -1323,7 +1257,6 @@ export default function AdminDashboard() {
                     </div>
 
                   </div>
-
 
                   <div
                     className="
@@ -1369,9 +1302,6 @@ export default function AdminDashboard() {
 
               </section>
 
-
-              {/* Category List */}
-
               <section
                 className="
                   overflow-hidden
@@ -1406,7 +1336,6 @@ export default function AdminDashboard() {
                   </span>
 
                 </div>
-
 
                 {categories.length === 0 ? (
 
