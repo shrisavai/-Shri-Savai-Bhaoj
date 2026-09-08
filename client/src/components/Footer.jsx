@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../IMG/logo.png";
+import logo from "../IMG/logo.PNG";
 
 export default function Footer() {
   const cities = [
