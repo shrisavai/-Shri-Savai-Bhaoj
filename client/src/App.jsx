@@ -1,5 +1,5 @@
-
 import { Routes, Route, useLocation } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,16 +17,18 @@ import ProtectedRoute from "./components/ProtectedRoute";
 export default function App() {
   const location = useLocation();
 
-  // Hide ONLY the footer on admin pages
+  // Hide footer on admin pages
   const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
     <>
+      {/* Scroll to top whenever the route changes */}
+      <ScrollToTop />
+
       <Header />
 
       <main>
         <Routes>
-
           <Route
             path="/"
             element={<Home />}
@@ -65,7 +67,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-
         </Routes>
       </main>
 
@@ -73,4 +74,3 @@ export default function App() {
     </>
   );
 }
-

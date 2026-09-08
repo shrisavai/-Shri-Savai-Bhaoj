@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { api } from "../api";
-import SectionIntro from "../components/SectionIntro";
+import logo from "../IMG/logo.PNG";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -51,27 +51,17 @@ export default function Contact() {
   };
 
   return (
-    <div className="page contact-page">
+    <main className="min-h-screen  text-[#111111]">
 
-      {/* =========================================
-          INTRO
-      ========================================== */}
-
-      <SectionIntro
-        eyebrow="GET IN TOUCH"
-        title="Talk to us about your next shipment"
-        text="Tell us the product, quantity and destination port. Our export team will respond with specifications, availability and a quotation."
-      />
-
-      {/* =========================================
+      {/* =====================================================
           CONTACT LAYOUT
-      ========================================== */}
+      ====================================================== */}
 
       <div className="contact-luxury-grid">
 
-        {/* =======================================
+        {/* ===================================================
             LEFT — CONTACT INFORMATION
-        ======================================== */}
+        ==================================================== */}
 
         <aside className="contact-luxury-info">
 
@@ -83,14 +73,8 @@ export default function Contact() {
 
             <h2>
               Let's move your
-              <em> next shipment.</em>
+              <span> next shipment.</span>
             </h2>
-
-            <p>
-              From Rajasthan to international markets, our team
-              coordinates sourcing, specifications and export
-              requirements for every enquiry.
-            </p>
 
           </div>
 
@@ -139,6 +123,8 @@ export default function Contact() {
                 +91 77339 90502
                 <br />
                 +91 98259 78589
+                <br />
+                +91 82905 33589
               </p>
             </div>
 
@@ -159,7 +145,7 @@ export default function Contact() {
               </small>
 
               <p>
-                Info.shekharexim@gmail.com
+                INFO.SAVAIBHAOJMARBLE.COM
               </p>
             </div>
 
@@ -187,32 +173,76 @@ export default function Contact() {
         </aside>
 
 
-        {/* =======================================
-            RIGHT — FORM
-        ======================================== */}
+        {/* ===================================================
+            RIGHT — BLACK FORM
+        ==================================================== */}
 
-        <section className="contact-form-luxury">
+        <section
+          className="
+            contact-form-luxury
+            !bg-black
+            !text-white
+          "
+        >
 
-          <div className="contact-form-header">
+          {/* FORM HEADER */}
+
+          <div
+            className="
+              contact-form-header
+              !border-white/10
+            "
+          >
 
             <div>
 
-              <span>
+              <span className="!text-[#b58a3b]">
                 ENQUIRY FORM
               </span>
 
-              <h2>
+              <h2 className="!text-white">
                 Request a quotation
               </h2>
 
             </div>
 
-            <div className="contact-form-mark">
-              SVB
+
+            {/* LOGO / SVB MARK */}
+
+            <div
+              className="
+                flex
+                h-16
+                w-16
+                shrink-0
+                items-center
+                justify-center
+                overflow-hidden
+                rounded-full
+                border
+                border-white/20
+                bg-white
+                p-2
+                shadow-lg
+              "
+            >
+              <img
+                src={logo}
+                alt="Shri Savai Bhaoj Marble"
+                className="
+                  h-full
+                  w-full
+                  object-contain
+                "
+              />
             </div>
 
           </div>
 
+
+          {/* =================================================
+              FORM
+          ================================================== */}
 
           <form onSubmit={submit}>
 
@@ -222,18 +252,20 @@ export default function Contact() {
 
             <div className="form-section-title">
 
-              <span>
+              <span className="!bg-white !text-black">
                 01
               </span>
 
               <div>
-                <strong>
+
+                <strong className="!text-white">
                   Your details
                 </strong>
 
-                <small>
+                <small className="!text-white/50">
                   Tell us who we are speaking with
                 </small>
+
               </div>
 
             </div>
@@ -245,8 +277,8 @@ export default function Contact() {
 
               <label className="luxury-field">
 
-                <span>
-                  Full name <b>*</b>
+                <span className="!text-white/75">
+                  Full name <b className="!text-[#b58a3b]">*</b>
                 </span>
 
                 <input
@@ -256,6 +288,13 @@ export default function Contact() {
                     updateField("name", e.target.value)
                   }
                   placeholder="Your name"
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -265,7 +304,7 @@ export default function Contact() {
 
               <label className="luxury-field">
 
-                <span>
+                <span className="!text-white/75">
                   Company
                 </span>
 
@@ -275,6 +314,13 @@ export default function Contact() {
                     updateField("company", e.target.value)
                   }
                   placeholder="Company name"
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -284,7 +330,7 @@ export default function Contact() {
 
               <label className="luxury-field">
 
-                <span>
+                <span className="!text-white/75">
                   Country
                 </span>
 
@@ -294,6 +340,13 @@ export default function Contact() {
                     updateField("country", e.target.value)
                   }
                   placeholder="Country / market"
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -303,7 +356,7 @@ export default function Contact() {
 
               <label className="luxury-field">
 
-                <span>
+                <span className="!text-white/75">
                   Phone
                 </span>
 
@@ -314,6 +367,13 @@ export default function Contact() {
                     updateField("phone", e.target.value)
                   }
                   placeholder="+91"
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -323,8 +383,9 @@ export default function Contact() {
 
               <label className="luxury-field full">
 
-                <span>
-                  Business email <b>*</b>
+                <span className="!text-white/75">
+                  Business email{" "}
+                  <b className="!text-[#b58a3b]">*</b>
                 </span>
 
                 <input
@@ -335,6 +396,13 @@ export default function Contact() {
                     updateField("email", e.target.value)
                   }
                   placeholder="you@company.com"
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -346,20 +414,27 @@ export default function Contact() {
                 REQUIREMENTS
             ================================== */}
 
-            <div className="form-section-title form-section-second">
+            <div
+              className="
+                form-section-title
+                form-section-second
+              "
+            >
 
-              <span>
+              <span className="!bg-white !text-black">
                 02
               </span>
 
               <div>
-                <strong>
+
+                <strong className="!text-white">
                   Shipment requirements
                 </strong>
 
-                <small>
+                <small className="!text-white/50">
                   Help us understand what you need
                 </small>
+
               </div>
 
             </div>
@@ -371,8 +446,9 @@ export default function Contact() {
 
               <label className="luxury-field full">
 
-                <span>
-                  Product / material <b>*</b>
+                <span className="!text-white/75">
+                  Product / material{" "}
+                  <b className="!text-[#b58a3b]">*</b>
                 </span>
 
                 <input
@@ -382,6 +458,13 @@ export default function Contact() {
                     updateField("product", e.target.value)
                   }
                   placeholder="Marble, Granite, Limestone, Gypsum..."
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -391,8 +474,9 @@ export default function Contact() {
 
               <label className="luxury-field full">
 
-                <span>
-                  Shipment details <b>*</b>
+                <span className="!text-white/75">
+                  Shipment details{" "}
+                  <b className="!text-[#b58a3b]">*</b>
                 </span>
 
                 <textarea
@@ -402,6 +486,13 @@ export default function Contact() {
                     updateField("message", e.target.value)
                   }
                   placeholder="Quantity, dimensions, finish, destination port, packaging requirements..."
+                  className="
+                    !border-white/20
+                    !bg-white/[0.06]
+                    !text-white
+                    placeholder:!text-white/30
+                    focus:!border-[#b58a3b]
+                  "
                 />
 
               </label>
@@ -414,6 +505,7 @@ export default function Contact() {
             ================================== */}
 
             {status === "success" && (
+
               <div className="contact-status contact-status-success">
 
                 <span>
@@ -421,6 +513,7 @@ export default function Contact() {
                 </span>
 
                 <div>
+
                   <strong>
                     Enquiry received
                   </strong>
@@ -429,13 +522,16 @@ export default function Contact() {
                     Thank you. Our export team will review
                     your requirements and get back to you.
                   </p>
+
                 </div>
 
               </div>
+
             )}
 
 
             {status === "error" && (
+
               <div className="contact-status contact-status-error">
 
                 <span>
@@ -443,6 +539,7 @@ export default function Contact() {
                 </span>
 
                 <div>
+
                   <strong>
                     Unable to send enquiry
                   </strong>
@@ -451,9 +548,11 @@ export default function Contact() {
                     Please try again or contact our team
                     directly.
                   </p>
+
                 </div>
 
               </div>
+
             )}
 
 
@@ -463,13 +562,27 @@ export default function Contact() {
 
             <div className="contact-submit-area">
 
-              <p>
-                <span>*</span>
+              <p className="!text-white/45">
+                <span className="!text-[#b58a3b]">
+                  *
+                </span>{" "}
                 Required fields
               </p>
 
+
               <button
-                className="contact-submit"
+                className="
+                  contact-submit
+                  !border
+                  !border-white
+                  !bg-white
+                  !text-black
+                  transition-all
+                  duration-300
+                  hover:!border-[#b58a3b]
+                  hover:!bg-[#b58a3b]
+                  hover:!text-white
+                "
                 type="submit"
                 disabled={sending}
               >
@@ -496,6 +609,6 @@ export default function Contact() {
 
       </div>
 
-    </div>
+    </main>
   );
 }

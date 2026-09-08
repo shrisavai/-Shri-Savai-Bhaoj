@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import SectionIntro from "../components/SectionIntro";
 
 import GSTCertificate from "../PDF/GSTCertificate.pdf";
 import ImporterExporterCode from "../PDF/ImporterExporterCode.pdf";
@@ -7,6 +6,10 @@ import UdyamRegistrationCertificate from "../PDF/UdyamRegistrationCertificate.pd
 
 export default function Certifications() {
   const [selected, setSelected] = useState(null);
+
+  /* =========================================================
+     CERTIFICATES
+  ========================================================= */
 
   const certificates = [
     {
@@ -39,7 +42,44 @@ export default function Certifications() {
   ];
 
   /* =========================================================
-     CLOSE VIEWER
+     LEGAL DETAILS
+  ========================================================= */
+
+  const legalDetails = [
+    {
+      title: "Brand & Group Name",
+      value: "Shri Savai Bhaoj Marble",
+      icon: "◇",
+    },
+    {
+      title: "Founder",
+      value: "Kanhaiya Lal",
+      icon: "♙",
+    },
+    {
+      title: "Account Name",
+      value: "Shri Savai Bhaoj Marble",
+      icon: "▣",
+    },
+    {
+      title: "Bank",
+      value: "HDFC Bank",
+      icon: "⌂",
+    },
+    {
+      title: "Account Number",
+      value: "5020 0094 6796 23",
+      icon: "▤",
+    },
+    {
+      title: "IFSC Code",
+      value: "HDFC0002587",
+      icon: "▥",
+    },
+  ];
+
+  /* =========================================================
+     CLOSE DOCUMENT
   ========================================================= */
 
   const closeDocument = () => {
@@ -65,7 +105,7 @@ export default function Certifications() {
   }, []);
 
   /* =========================================================
-     LOCK BODY SCROLL
+     LOCK BODY SCROLL WHEN DOCUMENT IS OPEN
   ========================================================= */
 
   useEffect(() => {
@@ -81,309 +121,745 @@ export default function Certifications() {
   }, [selected]);
 
   return (
-    <div className="min-h-screen bg-[#f5f2eb] text-[#171717]">
+    <main className="min-h-screen bg-black text-white">
 
       {/* =====================================================
-          INTRO
-      ===================================================== */}
+          INTRO — WHITE / 20VH
+      ====================================================== */}
 
-      <section className="relative overflow-hidden">
+      <section
+        className="
+          flex
+          min-h-[20vh]
+          items-center
+          border-b
+          border-[#dedbd5]
+          bg-white
+          text-[#111111]
+        "
+      >
+        <div
+          className="
+            mx-auto
+            w-full
+            max-w-7xl
+            px-5
+            py-7
+            sm:px-8
+            lg:px-10
+          "
+        >
+          <div className="max-w-3xl">
 
-        {/* Decorative background */}
+            {/* SMALL LABEL */}
 
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#b08d57]/10 blur-3xl" />
+            <div className="mb-3 flex items-center gap-3">
 
-        <div className="mx-auto max-w-7xl px-5 pb-14 pt-10 sm:px-8 lg:px-12 lg:pb-20 lg:pt-16">
+              <span className="h-[2px] w-8 bg-[#b58a3b]" />
 
-          <SectionIntro
-            eyebrow="TRUST & COMPLIANCE"
-            title="Certifications"
-            text="Documentation held for export, quality and manufacturing compliance — copies available on request for tender submissions."
-          />
-
-        </div>
-
-      </section>
-
-      {/* =====================================================
-          CERTIFICATE GRID
-      ===================================================== */}
-
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-12 lg:pb-32">
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-          {certificates.map((certificate) => (
-            <article
-              key={certificate.id}
-              className="group relative overflow-hidden rounded-sm border border-[#171717]/10 bg-white shadow-[0_15px_50px_rgba(0,0,0,0.07)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_25px_70px_rgba(0,0,0,0.13)]"
-            >
-
-              {/* =================================================
-                  CARD TOP
-              ================================================== */}
-
-              <div className="relative flex items-center justify-between border-b border-[#171717]/10 bg-[#faf9f6] px-6 py-4">
-
-                <div className="flex items-center gap-3">
-
-                  <span className="font-serif text-lg text-[#9a7948]">
-                    {certificate.number}
-                  </span>
-
-                  <span className="h-4 w-px bg-[#171717]/15" />
-
-                  <span className="text-[9px] font-bold tracking-[0.2em] text-[#171717]/50">
-                    CERTIFICATION
-                  </span>
-
-                </div>
-
-                <span className="flex items-center gap-2 rounded-full border border-green-700/20 bg-green-50 px-3 py-1.5 text-[8px] font-bold tracking-[0.12em] text-green-700">
-
-                  <span className="h-1.5 w-1.5 rounded-full bg-green-600" />
-
-                  VERIFIED
-
-                </span>
-
-              </div>
-
-              {/* =================================================
-                  PDF PREVIEW
-              ================================================== */}
-
-              <div
-                className="group/preview relative h-[440px] cursor-pointer overflow-hidden bg-[#dedbd4]"
-                onClick={() => setSelected(certificate)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    setSelected(certificate);
-                  }
-                }}
-                aria-label={`View ${certificate.name}`}
+              <span
+                className="
+                  text-[9px]
+                  font-medium
+                  uppercase
+                  tracking-[0.18em]
+                  text-[#806d56]
+                "
               >
+                TRUST & COMPLIANCE
+              </span>
 
-                {/* PDF */}
+            </div>
 
-                <iframe
-                  src={`${certificate.file}#toolbar=0&navpanes=0&scrollbar=0`}
-                  title={`${certificate.name} preview`}
-                  className="pointer-events-none absolute inset-0 h-full w-full border-0 bg-white"
-                />
+            {/* TITLE */}
 
-                {/* Dark hover overlay */}
+            <h1
+              className="
+                text-3xl
+                font-semibold
+                leading-tight
+                tracking-[-0.025em]
+                text-[#111111]
+                sm:text-4xl
+              "
+            >
+              Our Certifications
+            </h1>
 
-                <div className="absolute inset-0 bg-black/0 transition-all duration-500 group-hover/preview:bg-black/35" />
+            {/* DESCRIPTION */}
 
-                {/* Center hover button */}
+            <p
+              className="
+                mt-2
+                max-w-2xl
+                text-sm
+                leading-6
+                text-[#62686d]
+                sm:text-base
+              "
+            >
+              Government-verified registrations and documentation supporting
+              our business and international trade operations.
+            </p>
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover/preview:opacity-100">
-
-                  <div className="flex items-center gap-3 rounded-sm bg-white px-7 py-4 shadow-2xl">
-
-                    <span className="text-[10px] font-extrabold tracking-[0.2em] text-[#171717]">
-                      VIEW CERTIFICATE
-                    </span>
-
-                    <span className="text-xl leading-none text-[#9a7948]">
-                      ↗
-                    </span>
-
-                  </div>
-
-                </div>
-
-                {/* Bottom preview label */}
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-
-                  <span className="rounded-sm bg-black/75 px-3 py-2 text-[8px] font-bold tracking-[0.16em] text-white backdrop-blur-sm">
-                    OFFICIAL DOCUMENT
-                  </span>
-
-                  <span className="rounded-full bg-white px-3 py-2 text-xs font-bold text-[#171717] shadow-lg">
-                    ↗
-                  </span>
-
-                </div>
-
-              </div>
-
-              {/* =================================================
-                  CARD CONTENT
-              ================================================== */}
-
-              <div className="p-7">
-
-                {/* Category */}
-
-                <div className="flex items-center gap-3">
-
-                  <span className="h-px w-7 bg-[#9a7948]" />
-
-                  <span className="text-[9px] font-bold tracking-[0.2em] text-[#9a7948]">
-                    QUALITY & COMPLIANCE
-                  </span>
-
-                </div>
-
-                {/* Title */}
-
-                <h3 className="mt-4 font-serif text-[26px] leading-[1.15] text-[#171717]">
-                  {certificate.name}
-                </h3>
-
-                {/* Issuer */}
-
-                <div className="mt-6 rounded-sm border border-[#171717]/10 bg-[#faf9f6] p-4">
-
-                  <span className="block text-[8px] font-bold tracking-[0.2em] text-[#171717]/40">
-                    ISSUED BY
-                  </span>
-
-                  <span className="mt-1 block text-sm font-semibold text-[#171717]">
-                    {certificate.issuer}
-                  </span>
-
-                </div>
-
-                {/* Description */}
-
-                <p className="mt-5 text-sm leading-7 text-[#171717]/55">
-                  {certificate.description}
-                </p>
-
-                {/* Buttons */}
-
-                <div className="mt-7 flex flex-col gap-3">
-
-                  {/* View button */}
-
-                  <button
-                    type="button"
-                    onClick={() => setSelected(certificate)}
-                    className="flex w-full items-center justify-between rounded-sm bg-[#171717] px-5 py-4 text-left text-white transition-all duration-300 hover:bg-[#9a7948]"
-                  >
-
-                    <span className="text-[10px] font-bold tracking-[0.16em] text-white">
-                      VIEW CERTIFICATE
-                    </span>
-
-                    <span className="text-lg font-normal text-white">
-                      ↗
-                    </span>
-
-                  </button>
-
-                  {/* Request button */}
-
-                  <a
-                    href={`/contact?certificate=${encodeURIComponent(
-                      certificate.name
-                    )}`}
-                    className="flex w-full items-center justify-between rounded-sm border-2 border-[#171717] bg-white px-5 py-3.5 text-left no-underline transition-all duration-300 hover:bg-[#f5f2eb]"
-                  >
-
-                    <span className="text-[10px] font-bold tracking-[0.13em] text-[#171717]">
-                      REQUEST DOCUMENTATION
-                    </span>
-
-                    <span className="text-lg text-[#9a7948]">
-                      →
-                    </span>
-
-                  </a>
-
-                </div>
-
-              </div>
-
-            </article>
-          ))}
-
+          </div>
         </div>
-
       </section>
 
+
       {/* =====================================================
-          BOTTOM CTA
-      ===================================================== */}
+          CERTIFICATIONS — BLACK BACKGROUND
+      ====================================================== */}
 
-      <section className="relative overflow-hidden border-t border-[#171717]/10 bg-[#1b1b19]">
+     <section className="min-h-[90vh] bg-black text-white">
 
-        {/* Decorative circles */}
+  <div
+    className="
+      mx-auto
+      flex
+      min-h-[90vh]
+      max-w-7xl
+      flex-col
+      justify-center
+      px-5
+      py-8
+      sm:px-8
+      sm:py-10
+      lg:px-10
+      lg:py-12
+    "
+  >
 
-        <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border border-[#b08d57]/20" />
+  
 
-        <div className="pointer-events-none absolute -right-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border border-[#b08d57]/20" />
 
-        <div className="relative mx-auto max-w-4xl px-5 py-20 text-center sm:px-8 lg:py-28">
+    {/* =================================================
+        CERTIFICATE CARDS
+    ================================================== */}
 
-          {/* Label */}
+    <div
+      className="
+        grid
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
+        lg:gap-5
+      "
+    >
 
-          <div className="mb-8 flex items-center justify-center gap-4">
+      {certificates.map((certificate, index) => (
 
-            <span className="h-px w-12 bg-[#b08d57]/50" />
+        <article
+          key={certificate.id}
+          className="
+            group
+            relative
+            overflow-hidden
+            rounded-2xl
+            border
+            border-white/10
+            bg-white
+            text-[#111111]
+            shadow-[0_10px_30px_rgba(0,0,0,0.35)]
+            transition-all
+            duration-500
+            hover:-translate-y-2
+            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]
+          "
+          style={{
+            animationDelay: `${index * 100}ms`,
+          }}
+        >
 
-            <span className="text-[9px] font-bold tracking-[0.3em] text-[#c5a46d]">
-              DOCUMENTATION
-            </span>
+          {/* =================================================
+              VERIFIED BADGE
+          ================================================== */}
 
-            <span className="h-px w-12 bg-[#b08d57]/50" />
+          <div
+            className="
+              absolute
+              left-4
+              top-4
+              z-10
+              flex
+              h-7
+              w-7
+              items-center
+              justify-center
+              rounded-full
+              bg-[#48c878]
+              text-white
+              shadow-md
+              transition-transform
+              duration-300
+              group-hover:scale-110
+            "
+          >
+
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+            >
+              <path
+                d="M5 12.5 9.5 17 19 7.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
 
           </div>
 
-          {/* Heading */}
 
-          <h2 className="font-serif text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
+          {/* =================================================
+              NUMBER
+          ================================================== */}
 
-            Need a certificate
+          <div
+            className="
+              absolute
+              right-4
+              top-4
+              text-[9px]
+              font-semibold
+              tracking-[0.16em]
+              text-black/25
+            "
+          >
+            {certificate.number}
+          </div>
 
-            <em className="mt-1 block font-normal text-[#c5a46d]">
-              for your shipment?
-            </em>
 
-          </h2>
+          {/* =================================================
+              DOCUMENT ICON
+          ================================================== */}
 
-          {/* Text */}
-
-          <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-white/60 sm:text-base">
-            Contact our export team for certificate copies,
-            compliance documentation and tender requirements.
-          </p>
-
-          {/* CTA */}
-
-          <a
-            href="/contact"
-            className="group mt-9 inline-flex items-center gap-8 rounded-sm bg-[#b08d57] px-8 py-4 no-underline shadow-lg transition-all duration-300 hover:bg-[#c19c63] hover:shadow-xl"
+          <div
+            className="
+              flex
+              h-[155px]
+              items-center
+              justify-center
+              bg-white
+              px-6
+              pt-5
+              sm:h-[165px]
+              lg:h-[170px]
+            "
           >
 
-            <span className="text-[10px] font-extrabold tracking-[0.18em] text-white">
-              REQUEST DOCUMENTATION
-            </span>
+            <div
+              className="
+                flex
+                h-24
+                w-24
+                items-center
+                justify-center
+                rounded-full
+                bg-[#f6f5f2]
+                transition-all
+                duration-500
+                group-hover:scale-105
+                group-hover:bg-[#efede8]
+                sm:h-28
+                sm:w-28
+              "
+            >
 
-            <span className="text-xl text-white transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
+              <svg
+                className="
+                  h-16
+                  w-16
+                  text-[#111111]
+                  transition-transform
+                  duration-500
+                  group-hover:scale-105
+                  sm:h-18
+                  sm:w-18
+                "
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
 
-          </a>
+                <rect
+                  x="20"
+                  y="10"
+                  width="27"
+                  height="36"
+                  rx="2"
+                />
+
+                <rect
+                  x="11"
+                  y="17"
+                  width="27"
+                  height="36"
+                  rx="2"
+                  fill="white"
+                />
+
+                <path d="M18 27h14" />
+                <path d="M18 34h14" />
+                <path d="M18 41h14" />
+                <path d="M18 48h10" />
+
+              </svg>
+
+            </div>
+
+          </div>
+
+
+          {/* =================================================
+              CARD CONTENT
+          ================================================== */}
+
+          <div
+            className="
+              flex
+              min-h-[190px]
+              flex-col
+              px-5
+              pb-5
+              text-center
+              sm:min-h-[200px]
+            "
+          >
+
+            <h3
+              className="
+                mx-auto
+                max-w-[260px]
+                text-base
+                font-semibold
+                leading-5
+                tracking-[-0.01em]
+                text-[#111111]
+                sm:text-lg
+              "
+            >
+              {certificate.name}
+            </h3>
+
+
+            <p
+              className="
+                mt-2
+                text-[11px]
+                leading-5
+                text-[#747a7f]
+              "
+            >
+              Issued by{" "}
+
+              <span className="font-medium text-[#42474b]">
+                {certificate.issuer}
+              </span>
+            </p>
+
+
+            <p
+              className="
+                mx-auto
+                mt-2
+                max-w-[270px]
+                text-[10px]
+                leading-4
+                text-[#858b90]
+                sm:text-[11px]
+                sm:leading-5
+              "
+            >
+              {certificate.description}
+            </p>
+
+
+            {/* =================================================
+                VIEW BUTTON
+            ================================================== */}
+
+            <div className="mt-auto pt-4">
+
+              <button
+                type="button"
+                onClick={() => setSelected(certificate)}
+                className="
+                  inline-flex
+                  min-w-[105px]
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-black
+                  px-5
+                  py-2.5
+                  text-xs
+                  font-semibold
+                  !text-white
+                  shadow-md
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:bg-[#b58a3b]
+                  hover:shadow-lg
+                "
+              >
+
+                <span className="!text-white">
+                  View
+                </span>
+
+                <span
+                  className="
+                    text-sm
+                    font-normal
+                    !text-white
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                >
+                  ↗
+                </span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
+
+
+      {/* =====================================================
+          COMPLIANCE STRIP
+      ====================================================== */}
+
+      <section
+        className="
+          border-y
+          border-white/10
+          bg-black
+          text-white
+        "
+      >
+
+        <div
+          className="
+            mx-auto
+            max-w-7xl
+            px-5
+            py-9
+            sm:px-8
+            lg:px-10
+          "
+        >
+
+          <div
+            className="
+              flex
+              flex-col
+              gap-5
+              sm:flex-row
+              sm:items-center
+              sm:justify-between
+            "
+          >
+
+            <div>
+
+              <p
+                className="
+                  text-[9px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.18em]
+                  text-[#b58a3b]
+                "
+              >
+                VERIFIED DOCUMENTATION
+              </p>
+
+              <h3
+                className="
+                  mt-1
+                  text-lg
+                  font-semibold
+                  tracking-[-0.02em]
+                  text-white
+                "
+              >
+                Transparency in every transaction.
+              </h3>
+
+            </div>
+
+
+            <div
+              className="
+                flex
+                items-center
+                gap-3
+                text-sm
+                text-white/70
+              "
+            >
+
+              <span
+                className="
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white
+                  text-black
+                "
+              >
+
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path
+                    d="M5 12.5 9.5 17 19 7.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+
+              </span>
+
+              <span>
+                Official business documentation
+              </span>
+
+            </div>
+
+          </div>
 
         </div>
 
       </section>
 
+
       {/* =====================================================
-          PDF LIGHTBOX
-      ===================================================== */}
+          LEGAL DETAILS
+      ====================================================== */}
+
+    <section
+  className="
+    min-h-[80vh]
+    border-t
+    border-white/10
+    bg-black
+    text-white
+    flex
+    items-center
+  "
+>
+  <div
+    className="
+      mx-auto
+      w-full
+      max-w-7xl
+      px-5
+      py-10
+      sm:px-8
+      sm:py-12
+      lg:px-10
+      lg:py-14
+    "
+  >
+
+    {/* HEADER */}
+
+    <div className="mb-7 sm:mb-8">
+
+      <div className="flex items-center gap-3">
+
+        <span className="h-px w-9 bg-[#b58a3b]" />
+
+        <span
+          className="
+            text-[9px]
+            font-semibold
+            uppercase
+            tracking-[0.22em]
+            text-[#c5b49b]
+          "
+        >
+          BUSINESS INFORMATION
+        </span>
+
+      </div>
+
+      <h2
+        className="
+          mt-3
+          text-2xl
+          font-light
+          tracking-[-0.025em]
+          text-white
+          sm:text-3xl
+        "
+      >
+        Our Legal Details
+      </h2>
+
+      <p
+        className="
+          mt-2
+          max-w-2xl
+          text-sm
+          leading-6
+          text-white/55
+        "
+      >
+        Official business and banking information for commercial
+        verification and international transactions.
+      </p>
+
+    </div>
+
+
+    {/* LEGAL CARDS */}
+
+    <div
+      className="
+        grid
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-3
+      "
+    >
+
+      {legalDetails.map((item, index) => (
+
+        <div
+          key={item.title}
+          className="
+            group
+            min-h-[165px]
+            rounded-[18px]
+            border
+            border-white/10
+            bg-white
+            px-5
+            py-5
+            text-[#111111]
+            shadow-[0_8px_25px_rgba(0,0,0,0.3)]
+            transition-all
+            duration-500
+            hover:-translate-y-1.5
+            hover:border-[#b58a3b]/50
+            hover:shadow-[0_18px_40px_rgba(0,0,0,0.45)]
+          "
+          style={{
+            animationDelay: `${index * 70}ms`,
+          }}
+        >
+
+          {/* ICON */}
+
+          <div
+            className="
+              mx-auto
+              flex
+              h-12
+              w-12
+              items-center
+              justify-center
+              rounded-full
+              bg-black
+              text-lg
+              text-white
+              transition-all
+              duration-500
+              group-hover:scale-105
+              group-hover:bg-[#b58a3b]
+            "
+          >
+            {item.icon}
+          </div>
+
+
+          {/* TEXT */}
+
+          <div className="mt-4 text-center">
+
+            <h3
+              className="
+                text-sm
+                font-semibold
+                text-[#111111]
+              "
+            >
+              {item.title}
+            </h3>
+
+            <p
+              className="
+                mt-1.5
+                break-words
+                text-xs
+                leading-5
+                text-[#777777]
+              "
+            >
+              {item.value}
+            </p>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+
+      {/* =====================================================
+          DOCUMENT VIEWER — VIEW ONLY
+      ====================================================== */}
 
       {selected && (
+
         <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/85 p-2 backdrop-blur-md sm:p-5 lg:p-8"
+          className="
+            fixed
+            inset-0
+            z-[99999]
+            flex
+            items-center
+            justify-center
+            bg-black/90
+            p-2
+            backdrop-blur-md
+            sm:p-5
+            lg:p-8
+          "
           onClick={closeDocument}
           role="dialog"
           aria-modal="true"
@@ -391,7 +867,17 @@ export default function Certifications() {
         >
 
           <div
-            className="flex h-full w-full max-w-7xl flex-col overflow-hidden rounded-sm bg-[#f5f2eb] shadow-2xl"
+            className="
+              flex
+              h-full
+              w-full
+              max-w-7xl
+              flex-col
+              overflow-hidden
+              rounded-2xl
+              bg-[#f5f5f3]
+              shadow-2xl
+            "
             onClick={(event) => event.stopPropagation()}
           >
 
@@ -399,23 +885,62 @@ export default function Certifications() {
                 VIEWER HEADER
             ================================================== */}
 
-            <div className="flex shrink-0 items-center justify-between border-b border-black/10 bg-white px-5 py-4 sm:px-7">
+            <div
+              className="
+                flex
+                shrink-0
+                items-center
+                justify-between
+                border-b
+                border-black/10
+                bg-white
+                px-5
+                py-4
+                sm:px-7
+              "
+            >
 
               <div className="min-w-0 pr-5">
 
                 <div className="flex items-center gap-3">
 
-                  <span className="h-2 w-2 rounded-full bg-green-600" />
+                  <span
+                    className="
+                      h-2
+                      w-2
+                      rounded-full
+                      bg-[#48c878]
+                    "
+                  />
 
-                  <span className="text-[8px] font-bold tracking-[0.25em] text-black/40">
-                    OFFICIAL DOCUMENT
+                  <span
+                    className="
+                      text-[8px]
+                      font-bold
+                      uppercase
+                      tracking-[0.22em]
+                      text-black/40
+                    "
+                  >
+                    Official Document
                   </span>
 
                 </div>
 
-                <h2 className="mt-1 truncate font-serif text-xl text-black sm:text-2xl">
+
+                <h2
+                  className="
+                    mt-1
+                    truncate
+                    text-lg
+                    font-semibold
+                    text-black
+                    sm:text-xl
+                  "
+                >
                   {selected.name}
                 </h2>
+
 
                 <p className="mt-1 text-xs text-black/45">
                   Issued by {selected.issuer}
@@ -423,12 +948,31 @@ export default function Certifications() {
 
               </div>
 
-              {/* Close */}
+
+              {/* CLOSE */}
 
               <button
                 type="button"
                 onClick={closeDocument}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border-2 border-black bg-white text-2xl leading-none text-black transition-all duration-300 hover:bg-black hover:text-white"
+                className="
+                  flex
+                  h-11
+                  w-11
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-black
+                  bg-white
+                  text-2xl
+                  leading-none
+                  text-black
+                  transition-all
+                  duration-300
+                  hover:bg-black
+                  hover:text-white
+                "
                 aria-label="Close document"
               >
                 ×
@@ -436,87 +980,125 @@ export default function Certifications() {
 
             </div>
 
+
             {/* =================================================
-                PDF
+                PDF VIEWER
             ================================================== */}
 
-            <div className="min-h-0 flex-1 bg-[#cbc7be] p-2 sm:p-4">
+            <div
+              className="
+                relative
+                min-h-0
+                flex-1
+                overflow-hidden
+                bg-[#d8d9da]
+                p-2
+                sm:p-4
+              "
+            >
 
               <iframe
-                src={`${selected.file}#toolbar=1&navpanes=0`}
-                title={`${selected.name} full certificate`}
-                className="h-full w-full border-0 bg-white shadow-xl"
+                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1`}
+                title={`${selected.name} certificate`}
+                className="
+                  h-full
+                  w-full
+                  border-0
+                  bg-white
+                  shadow-xl
+                "
+                style={{
+                  pointerEvents: "auto",
+                }}
               />
 
             </div>
+
 
             {/* =================================================
                 VIEWER FOOTER
             ================================================== */}
 
-            <div className="flex shrink-0 flex-col gap-4 border-t border-black/10 bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+            <div
+              className="
+                flex
+                shrink-0
+                flex-col
+                gap-4
+                border-t
+                border-black/10
+                bg-white
+                px-5
+                py-4
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+                sm:px-7
+              "
+            >
 
               <div>
 
-                <span className="block text-[9px] font-medium tracking-[0.1em] text-black/40">
-                  CERTIFICATE DOCUMENT
+                <span
+                  className="
+                    block
+                    text-[9px]
+                    font-medium
+                    uppercase
+                    tracking-[0.1em]
+                    text-black/40
+                  "
+                >
+                  Certificate Document
                 </span>
 
                 <span className="mt-1 block text-xs text-black/55">
-                  Open the PDF in a new tab for full browser controls.
+                  Official document available for viewing only.
                 </span>
 
               </div>
 
-              <div className="flex flex-wrap gap-3">
 
-                {/* Open PDF */}
+              {/* ONLY CLOSE BUTTON — NO DOWNLOAD / OPEN BUTTON */}
 
-                <a
-                  href={selected.file}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-sm border-2 border-[#171717] bg-white px-6 py-3.5 no-underline transition-all duration-300 hover:bg-[#171717]"
+              <button
+                type="button"
+                onClick={closeDocument}
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-black
+                  px-6
+                  py-3
+                  transition-all
+                  duration-300
+                  hover:bg-[#b58a3b]
+                "
+              >
+
+                <span
+                  className="
+                    text-[10px]
+                    font-bold
+                    tracking-[0.12em]
+                    text-white
+                  "
                 >
-                  <span className="text-[10px] font-extrabold tracking-[0.14em] text-[#171717] hover:text-white">
-                    OPEN PDF ↗
-                  </span>
-                </a>
+                  CLOSE
+                </span>
 
-                {/* Request */}
-
-                <a
-                  href={`/contact?certificate=${encodeURIComponent(
-                    selected.name
-                  )}`}
-                  className="inline-flex items-center justify-center rounded-sm bg-[#171717] px-6 py-3.5 no-underline transition-all duration-300 hover:bg-[#9a7948]"
-                >
-                  <span className="text-[10px] font-extrabold tracking-[0.14em] text-white">
-                    REQUEST A COPY →
-                  </span>
-                </a>
-
-                {/* Close */}
-
-                <button
-                  type="button"
-                  onClick={closeDocument}
-                  className="inline-flex items-center justify-center rounded-sm border-2 border-[#171717]/20 bg-[#f5f2eb] px-6 py-3.5 transition-all duration-300 hover:border-[#171717] hover:bg-[#171717]"
-                >
-                  <span className="text-[10px] font-extrabold tracking-[0.14em] text-[#171717]">
-                    CLOSE
-                  </span>
-                </button>
-
-              </div>
+              </button>
 
             </div>
 
           </div>
 
         </div>
+
       )}
 
-    </div>
+    </main>
   );
 }

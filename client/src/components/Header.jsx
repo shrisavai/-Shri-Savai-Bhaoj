@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../IMG/logo.PNG";
@@ -7,7 +6,7 @@ const links = [
   ["/", "Home"],
   ["/products", "Products"],
   ["/export-info", "Export Info"],
-  ["/certifications", "Certifications"],
+  ["/certifications", "About Us"],
   ["/contact", "Contact"],
 ];
 
@@ -15,94 +14,216 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) =>
-    `relative py-2 text-[13px] font-medium transition-colors duration-200
-    ${
-      isActive
-        ? "text-gray-950"
-        : "text-gray-500 hover:text-gray-950"
-    }
-    after:absolute after:bottom-0 after:left-0 after:h-[1.5px]
-    after:bg-gray-900 after:transition-all after:duration-200
-    ${
-      isActive
-        ? "after:w-full"
-        : "after:w-0 hover:after:w-full"
-    }`;
+    `
+      group
+      relative
+      py-2
+      text-[11px]
+      font-medium
+      uppercase
+      tracking-[0.12em]
+      transition-colors
+      duration-300
+
+      ${
+        isActive
+          ? "text-white"
+          : "text-white/55 hover:text-white"
+      }
+
+      after:absolute
+      after:bottom-0
+      after:left-0
+      after:h-px
+      after:bg-white
+      after:transition-all
+      after:duration-300
+
+      ${
+        isActive
+          ? "after:w-full"
+          : "after:w-0 group-hover:after:w-full"
+      }
+    `;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200/80 bg-white/95 backdrop-blur-md">
+    <header
+      className="
+        sticky
+        top-0
+        z-50
+        w-full
+        border-b
+        border-white/[0.08]
+        bg-[#0d0d0d]/95
+        text-white
+        shadow-[0_8px_30px_rgba(0,0,0,0.12)]
+        backdrop-blur-xl
+      "
+    >
 
-      {/* Main Header */}
+      {/* HEADER */}
 
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+      <div
+        className="
+          mx-auto
+          flex
+          h-[72px]
+          max-w-7xl
+          items-center
+          justify-between
+          px-5
 
-        {/* Brand */}
+          sm:h-[78px]
+          sm:px-7
+
+          lg:px-10
+        "
+      >
+
+        {/* =================================================
+            BRAND
+        ================================================= */}
 
         <Link
           to="/"
           onClick={() => setMenuOpen(false)}
-          className="group flex min-w-0 items-center gap-3"
+          className="
+            group
+            flex
+            items-center
+            gap-3.5
+          "
         >
+
+          {/* LOGO */}
+
           <div
             className="
-              flex h-11 w-11 shrink-0
-              items-center justify-center
-              overflow-hidden
-              sm:h-14 sm:w-14
+              relative
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/20
+              bg-white
+              p-[3px]
+              shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+              transition-all
+              duration-500
+
+              sm:h-12
+              sm:w-12
+              sm:p-1
+
+              group-hover:border-white/40
+              group-hover:shadow-[0_6px_25px_rgba(255,255,255,0.08)]
             "
           >
-            <img
-              src={logo}
-              alt="Shri Savai Bhaoj Marble & Granite"
+
+            <div
               className="
-                h-full w-full
-                object-contain
-                transition-transform
-                duration-300
-                group-hover:scale-105
+                flex
+                h-full
+                w-full
+                items-center
+                justify-center
+                overflow-hidden
+                rounded-full
+                bg-white
               "
-            />
+            >
+              <img
+                src={logo}
+                alt="Shri Savai Bhaoj Marble & Granite"
+                className="
+                  h-full
+                  w-full
+                  object-contain
+                  transition-transform
+                  duration-500
+                  group-hover:scale-105
+                "
+              />
+            </div>
+
           </div>
 
-          <div className="flex min-w-0 flex-col">
+
+          {/* BRAND TEXT */}
+
+          <div className="flex flex-col">
 
             <strong
               className="
-                truncate
                 font-serif
-                text-[15px]
-                font-semibold
-                tracking-tight
-                text-gray-900
-                sm:text-[18px]
+                text-[14px]
+                font-medium
+                leading-none
+                tracking-[-0.01em]
+                text-white
+
+                sm:text-[17px]
               "
             >
               Shri Savai Bhaoj
             </strong>
 
-            <span
+            <div
               className="
-                mt-1
-                text-[7px]
-                font-medium
-                tracking-[0.18em]
-                text-gray-500
-                sm:text-[9px]
-                sm:tracking-[0.22em]
+                mt-1.5
+                flex
+                items-center
+                gap-2
               "
             >
-              MARBLE & GRANITE
-            </span>
+
+              <span className="h-px w-3 bg-white/30" />
+
+              <span
+                className="
+                  text-[6px]
+                  font-medium
+                  uppercase
+                  tracking-[0.22em]
+                  text-white/45
+
+                  sm:text-[7px]
+                  sm:tracking-[0.25em]
+                "
+              >
+                Marble & Granite
+              </span>
+
+            </div>
 
           </div>
+
         </Link>
 
 
-        {/* Desktop Navigation */}
+        {/* =================================================
+            DESKTOP NAVIGATION
+        ================================================= */}
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+        <nav
+          className="
+            hidden
+            items-center
+            gap-7
+
+            lg:flex
+
+            xl:gap-9
+          "
+        >
 
           {links.map(([to, label]) => (
+
             <NavLink
               key={to}
               to={to}
@@ -111,83 +232,50 @@ export default function Header() {
             >
               {label}
             </NavLink>
+
           ))}
-
-
-          {/* Divider */}
-
-          <span className="ml-1 h-6 w-px bg-gray-200" />
-
-
-          {/* Desktop Admin */}
-
-          <Link
-            to="/admin"
-            className="
-              group flex items-center gap-2
-              rounded-md
-              border border-gray-900
-              bg-white
-              px-4 py-2.5
-              text-[12px]
-              font-medium
-              text-gray-900
-              transition-all
-              duration-200
-              hover:bg-gray-900
-              hover:text-white
-            "
-          >
-           
-
-            <span
-              className="
-                text-gray-900
-                transition-transform
-                duration-200
-                group-hover:translate-x-1
-                group-hover:text-white
-              "
-            >
-            Admin →
-            </span>
-          </Link>
 
         </nav>
 
 
-        {/* Mobile Menu Button */}
+        {/* =================================================
+            MOBILE MENU BUTTON
+        ================================================= */}
 
         <button
           type="button"
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="
-            flex h-10 w-10
-            items-center justify-center
-            rounded-md
-            border border-gray-200
-            bg-white
-            text-gray-900
-            transition-all
-            duration-200
-            hover:border-gray-400
-            hover:bg-gray-50
-            lg:hidden
-          "
           aria-label={
             menuOpen
               ? "Close navigation"
               : "Open navigation"
           }
           aria-expanded={menuOpen}
+          className="
+            flex
+            h-9
+            w-9
+            items-center
+            justify-center
+            rounded-full
+            border
+            border-white/15
+            bg-white/[0.04]
+            text-white
+            transition-all
+            duration-300
+
+            hover:border-white/30
+            hover:bg-white/[0.08]
+
+            lg:hidden
+          "
         >
 
           {menuOpen ? (
 
-            /* Close Icon */
-
             <svg
-              className="h-5 w-5"
+              className="h-4 w-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -195,17 +283,15 @@ export default function Header() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="1.8"
+                strokeWidth="1.6"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
 
           ) : (
 
-            /* Hamburger Icon */
-
             <svg
-              className="h-5 w-5"
+              className="h-4 w-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -213,8 +299,8 @@ export default function Header() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="1.8"
-                d="M4 7h16M4 12h16M4 17h16"
+                strokeWidth="1.6"
+                d="M5 8h14M5 12h14M5 16h14"
               />
             </svg>
 
@@ -225,16 +311,20 @@ export default function Header() {
       </div>
 
 
-      {/* Mobile Navigation */}
+      {/* =================================================
+          MOBILE NAVIGATION
+      ================================================= */}
 
       <div
         className={`
           overflow-hidden
-          border-t border-gray-100
-          bg-white
+          border-t
+          border-white/[0.06]
+          bg-[#0d0d0d]
           transition-all
-          duration-300
+          duration-500
           lg:hidden
+
           ${
             menuOpen
               ? "max-h-[500px] opacity-100"
@@ -243,11 +333,19 @@ export default function Header() {
         `}
       >
 
-        <nav className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+        <nav
+          className="
+            mx-auto
+            max-w-7xl
+            px-5
+            py-4
+            sm:px-7
+          "
+        >
 
           <div className="flex flex-col gap-1">
 
-            {links.map(([to, label]) => (
+            {links.map(([to, label], index) => (
 
               <NavLink
                 key={to}
@@ -256,69 +354,56 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
                   `
-                  flex items-center justify-between
-                  rounded-md
-                  px-4 py-3
-                  text-[13px]
-                  font-medium
-                  transition-all
-                  duration-200
-                  ${
-                    isActive
-                      ? "bg-gray-100 text-gray-950"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-950"
-                  }
+                    flex
+                    items-center
+                    justify-between
+                    rounded-xl
+                    px-4
+                    py-3.5
+                    text-[11px]
+                    font-medium
+                    uppercase
+                    tracking-[0.12em]
+                    transition-all
+                    duration-300
+
+                    ${
+                      isActive
+                        ? "bg-white/[0.09] text-white"
+                        : "text-white/50 hover:bg-white/[0.04] hover:text-white"
+                    }
                   `
                 }
               >
-                {label}
 
-                <span className="text-gray-400">
+                <span className="flex items-center gap-3">
+
+                  <span
+                    className="
+                      text-[8px]
+                      text-white/20
+                    "
+                  >
+                    0{index + 1}
+                  </span>
+
+                  {label}
+
+                </span>
+
+                <span
+                  className="
+                    text-white/25
+                    transition-transform
+                    duration-300
+                  "
+                >
                   →
                 </span>
 
               </NavLink>
 
             ))}
-
-
-            {/* Mobile Admin */}
-
-            <Link
-              to="/admin"
-              onClick={() => setMenuOpen(false)}
-              className="
-                group mt-3
-                flex items-center
-                justify-center
-                gap-2
-                rounded-md
-                border border-gray-900
-                bg-white
-                px-4 py-3
-                text-[12px]
-                font-medium
-                text-gray-900
-                transition-all
-                duration-200
-                hover:bg-gray-900
-                hover:text-white
-              "
-            >
-              <span>Admin Portal</span>
-
-              <span
-                className="
-                  text-gray-900
-                  transition-transform
-                  duration-200
-                  group-hover:translate-x-1
-                  group-hover:text-white
-                "
-              >
-                →
-              </span>
-            </Link>
 
           </div>
 
@@ -329,4 +414,3 @@ export default function Header() {
     </header>
   );
 }
-
