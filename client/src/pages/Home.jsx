@@ -220,27 +220,30 @@ export default function Home() {
 
 <section className="relative min-h-[90vh] overflow-hidden bg-white">
 
-  <div
-    className="
-      mx-auto
-      grid
-      min-h-[90vh]
-      max-w-[1500px]
-      items-center
-      px-5
-      py-4
+ <div
+  className="
+    mx-auto
+    grid
+    min-h-[90vh]
+    max-w-[1500px]
+    items-center
+    gap-y-10
+    px-5
+    py-4
 
-      sm:px-8
-      sm:py-5
+    sm:gap-y-12
+    sm:px-8
+    sm:py-5
 
-      lg:grid-cols-[0.82fr_1.18fr]
-      lg:gap-8
-      lg:px-10
-      lg:py-4
+    lg:grid-cols-[0.82fr_1.18fr]
+    lg:gap-x-16
+    lg:gap-y-0
+    lg:px-10
+    lg:py-4
 
-      xl:gap-10
-    "
-  >
+    xl:gap-x-20
+  "
+>
 
     {/* =================================================
         HERO CONTENT
@@ -422,7 +425,7 @@ export default function Home() {
         HERO IMAGE
     ================================================= */}
 
-    <div className="order-1 lg:order-2">
+    <div className="order-1 mb-4 lg:order-2 lg:mb-0">
 
       <div className="relative w-full">
 
