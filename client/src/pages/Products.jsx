@@ -346,8 +346,8 @@ export default function Products() {
 
                 <span className="ml-2 text-white/40">
                   {filteredProducts.length === 1
-                    ? "material"
-                    : "materials"}
+                    ? "Material"
+                    : "Materials"}
                 </span>
               </h2>
 
@@ -887,7 +887,7 @@ export default function Products() {
                   sm:text-3xl
                 "
               >
-                No materials found
+                No Materials found
               </h3>
 
 

@@ -87,22 +87,59 @@ export default function Certifications() {
   };
 
   /* =========================================================
-     ESC KEY
+     ESC KEY + PDF PROTECTION
   ========================================================= */
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      /* CLOSE WITH ESC */
       if (event.key === "Escape") {
         closeDocument();
+        return;
+      }
+
+      /*
+       * BLOCK COMMON SAVE / PRINT / VIEW-SOURCE SHORTCUTS
+       * WHILE PDF IS OPEN
+       */
+      if (selected) {
+        const key = event.key.toLowerCase();
+
+        if (
+          (event.ctrlKey || event.metaKey) &&
+          ["s", "p", "u"].includes(key)
+        ) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        /* BLOCK F12 / DEVTOOLS SHORTCUTS */
+        if (
+          event.key === "F12" ||
+          ((event.ctrlKey || event.metaKey) &&
+            event.shiftKey &&
+            ["i", "j", "c"].includes(key))
+        ) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }
+    };
+
+    const handleContextMenu = (event) => {
+      if (selected) {
+        event.preventDefault();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("contextmenu", handleContextMenu);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, []);
+  }, [selected]);
 
   /* =========================================================
      LOCK BODY SCROLL WHEN DOCUMENT IS OPEN
@@ -122,7 +159,6 @@ export default function Certifications() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-
       {/* =====================================================
           INTRO — WHITE / 20VH
       ====================================================== */}
@@ -154,7 +190,6 @@ export default function Certifications() {
             {/* SMALL LABEL */}
 
             <div className="mb-3 flex items-center gap-3">
-
               <span className="h-[2px] w-8 bg-[#b58a3b]" />
 
               <span
@@ -168,7 +203,6 @@ export default function Certifications() {
               >
                 TRUST & COMPLIANCE
               </span>
-
             </div>
 
             {/* TITLE */}
@@ -211,338 +245,333 @@ export default function Certifications() {
           CERTIFICATIONS — BLACK BACKGROUND
       ====================================================== */}
 
-     <section className="min-h-[90vh] bg-black text-white">
+      <section className="min-h-[90vh] bg-black text-white">
 
-  <div
-    className="
-      mx-auto
-      flex
-      min-h-[90vh]
-      max-w-7xl
-      flex-col
-      justify-center
-      px-5
-      py-8
-      sm:px-8
-      sm:py-10
-      lg:px-10
-      lg:py-12
-    "
-  >
-
-  
-
-
-    {/* =================================================
-        CERTIFICATE CARDS
-    ================================================== */}
-
-    <div
-      className="
-        grid
-        gap-4
-        sm:grid-cols-2
-        lg:grid-cols-3
-        lg:gap-5
-      "
-    >
-
-      {certificates.map((certificate, index) => (
-
-        <article
-          key={certificate.id}
+        <div
           className="
-            group
-            relative
-            overflow-hidden
-            rounded-2xl
-            border
-            border-white/10
-            bg-white
-            text-[#111111]
-            shadow-[0_10px_30px_rgba(0,0,0,0.35)]
-            transition-all
-            duration-500
-            hover:-translate-y-2
-            hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]
+            mx-auto
+            flex
+            min-h-[90vh]
+            max-w-7xl
+            flex-col
+            justify-center
+            px-5
+            py-8
+            sm:px-8
+            sm:py-10
+            lg:px-10
+            lg:py-12
           "
-          style={{
-            animationDelay: `${index * 100}ms`,
-          }}
         >
 
           {/* =================================================
-              VERIFIED BADGE
+              CERTIFICATE CARDS
           ================================================== */}
 
           <div
             className="
-              absolute
-              left-4
-              top-4
-              z-10
-              flex
-              h-7
-              w-7
-              items-center
-              justify-center
-              rounded-full
-              bg-[#48c878]
-              text-white
-              shadow-md
-              transition-transform
-              duration-300
-              group-hover:scale-110
+              grid
+              gap-4
+              sm:grid-cols-2
+              lg:grid-cols-3
+              lg:gap-5
             "
           >
 
-            <svg
-              className="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-            >
-              <path
-                d="M5 12.5 9.5 17 19 7.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            {certificates.map((certificate, index) => (
 
-          </div>
-
-
-          {/* =================================================
-              NUMBER
-          ================================================== */}
-
-          <div
-            className="
-              absolute
-              right-4
-              top-4
-              text-[9px]
-              font-semibold
-              tracking-[0.16em]
-              text-black/25
-            "
-          >
-            {certificate.number}
-          </div>
-
-
-          {/* =================================================
-              DOCUMENT ICON
-          ================================================== */}
-
-          <div
-            className="
-              flex
-              h-[155px]
-              items-center
-              justify-center
-              bg-white
-              px-6
-              pt-5
-              sm:h-[165px]
-              lg:h-[170px]
-            "
-          >
-
-            <div
-              className="
-                flex
-                h-24
-                w-24
-                items-center
-                justify-center
-                rounded-full
-                bg-[#f6f5f2]
-                transition-all
-                duration-500
-                group-hover:scale-105
-                group-hover:bg-[#efede8]
-                sm:h-28
-                sm:w-28
-              "
-            >
-
-              <svg
+              <article
+                key={certificate.id}
                 className="
-                  h-16
-                  w-16
+                  group
+                  relative
+                  overflow-hidden
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white
                   text-[#111111]
-                  transition-transform
-                  duration-500
-                  group-hover:scale-105
-                  sm:h-18
-                  sm:w-18
-                "
-                viewBox="0 0 64 64"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-
-                <rect
-                  x="20"
-                  y="10"
-                  width="27"
-                  height="36"
-                  rx="2"
-                />
-
-                <rect
-                  x="11"
-                  y="17"
-                  width="27"
-                  height="36"
-                  rx="2"
-                  fill="white"
-                />
-
-                <path d="M18 27h14" />
-                <path d="M18 34h14" />
-                <path d="M18 41h14" />
-                <path d="M18 48h10" />
-
-              </svg>
-
-            </div>
-
-          </div>
-
-
-          {/* =================================================
-              CARD CONTENT
-          ================================================== */}
-
-          <div
-            className="
-              flex
-              min-h-[190px]
-              flex-col
-              px-5
-              pb-5
-              text-center
-              sm:min-h-[200px]
-            "
-          >
-
-            <h3
-              className="
-                mx-auto
-                max-w-[260px]
-                text-base
-                font-semibold
-                leading-5
-                tracking-[-0.01em]
-                text-[#111111]
-                sm:text-lg
-              "
-            >
-              {certificate.name}
-            </h3>
-
-
-            <p
-              className="
-                mt-2
-                text-[11px]
-                leading-5
-                text-[#747a7f]
-              "
-            >
-              Issued by{" "}
-
-              <span className="font-medium text-[#42474b]">
-                {certificate.issuer}
-              </span>
-            </p>
-
-
-            <p
-              className="
-                mx-auto
-                mt-2
-                max-w-[270px]
-                text-[10px]
-                leading-4
-                text-[#858b90]
-                sm:text-[11px]
-                sm:leading-5
-              "
-            >
-              {certificate.description}
-            </p>
-
-
-            {/* =================================================
-                VIEW BUTTON
-            ================================================== */}
-
-            <div className="mt-auto pt-4">
-
-              <button
-                type="button"
-                onClick={() => setSelected(certificate)}
-                className="
-                  inline-flex
-                  min-w-[105px]
-                  items-center
-                  justify-center
-                  gap-2
-                  rounded-xl
-                  bg-black
-                  px-5
-                  py-2.5
-                  text-xs
-                  font-semibold
-                  !text-white
-                  shadow-md
+                  shadow-[0_10px_30px_rgba(0,0,0,0.35)]
                   transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:bg-[#b58a3b]
-                  hover:shadow-lg
+                  duration-500
+                  hover:-translate-y-2
+                  hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]
                 "
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
               >
 
-                <span className="!text-white">
-                  View
-                </span>
+                {/* =================================================
+                    VERIFIED BADGE
+                ================================================== */}
 
-                <span
+                <div
                   className="
-                    text-sm
-                    font-normal
-                    !text-white
+                    absolute
+                    left-4
+                    top-4
+                    z-10
+                    flex
+                    h-7
+                    w-7
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-[#48c878]
+                    text-white
+                    shadow-md
                     transition-transform
                     duration-300
-                    group-hover:translate-x-1
+                    group-hover:scale-110
                   "
                 >
-                  ↗
-                </span>
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                  >
+                    <path
+                      d="M5 12.5 9.5 17 19 7.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
 
-              </button>
 
-            </div>
+                {/* =================================================
+                    NUMBER
+                ================================================== */}
+
+                <div
+                  className="
+                    absolute
+                    right-4
+                    top-4
+                    text-[9px]
+                    font-semibold
+                    tracking-[0.16em]
+                    text-black/25
+                  "
+                >
+                  {certificate.number}
+                </div>
+
+
+                {/* =================================================
+                    DOCUMENT ICON
+                ================================================== */}
+
+                <div
+                  className="
+                    flex
+                    h-[155px]
+                    items-center
+                    justify-center
+                    bg-white
+                    px-6
+                    pt-5
+                    sm:h-[165px]
+                    lg:h-[170px]
+                  "
+                >
+
+                  <div
+                    className="
+                      flex
+                      h-24
+                      w-24
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-[#f6f5f2]
+                      transition-all
+                      duration-500
+                      group-hover:scale-105
+                      group-hover:bg-[#efede8]
+                      sm:h-28
+                      sm:w-28
+                    "
+                  >
+
+                    <svg
+                      className="
+                        h-16
+                        w-16
+                        text-[#111111]
+                        transition-transform
+                        duration-500
+                        group-hover:scale-105
+                        sm:h-18
+                        sm:w-18
+                      "
+                      viewBox="0 0 64 64"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+
+                      <rect
+                        x="20"
+                        y="10"
+                        width="27"
+                        height="36"
+                        rx="2"
+                      />
+
+                      <rect
+                        x="11"
+                        y="17"
+                        width="27"
+                        height="36"
+                        rx="2"
+                        fill="white"
+                      />
+
+                      <path d="M18 27h14" />
+                      <path d="M18 34h14" />
+                      <path d="M18 41h14" />
+                      <path d="M18 48h10" />
+
+                    </svg>
+
+                  </div>
+
+                </div>
+
+
+                {/* =================================================
+                    CARD CONTENT
+                ================================================== */}
+
+                <div
+                  className="
+                    flex
+                    min-h-[190px]
+                    flex-col
+                    px-5
+                    pb-5
+                    text-center
+                    sm:min-h-[200px]
+                  "
+                >
+
+                  <h3
+                    className="
+                      mx-auto
+                      max-w-[260px]
+                      text-base
+                      font-semibold
+                      leading-5
+                      tracking-[-0.01em]
+                      text-[#111111]
+                      sm:text-lg
+                    "
+                  >
+                    {certificate.name}
+                  </h3>
+
+
+                  <p
+                    className="
+                      mt-2
+                      text-[11px]
+                      leading-5
+                      text-[#747a7f]
+                    "
+                  >
+                    Issued by{" "}
+
+                    <span className="font-medium text-[#42474b]">
+                      {certificate.issuer}
+                    </span>
+                  </p>
+
+
+                  <p
+                    className="
+                      mx-auto
+                      mt-2
+                      max-w-[270px]
+                      text-[10px]
+                      leading-4
+                      text-[#858b90]
+                      sm:text-[11px]
+                      sm:leading-5
+                    "
+                  >
+                    {certificate.description}
+                  </p>
+
+
+                  {/* =================================================
+                      VIEW BUTTON
+                  ================================================== */}
+
+                  <div className="mt-auto pt-4">
+
+                    <button
+                      type="button"
+                      onClick={() => setSelected(certificate)}
+                      className="
+                        inline-flex
+                        min-w-[105px]
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        bg-black
+                        px-5
+                        py-2.5
+                        text-xs
+                        font-semibold
+                        !text-white
+                        shadow-md
+                        transition-all
+                        duration-300
+                        hover:-translate-y-0.5
+                        hover:bg-[#b58a3b]
+                        hover:shadow-lg
+                      "
+                    >
+
+                      <span className="!text-white">
+                        View
+                      </span>
+
+                      <span
+                        className="
+                          text-sm
+                          font-normal
+                          !text-white
+                          transition-transform
+                          duration-300
+                          group-hover:translate-x-1
+                        "
+                      >
+                        ↗
+                      </span>
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            ))}
 
           </div>
 
-        </article>
+        </div>
 
-      ))}
-
-    </div>
-
-  </div>
-
-</section>
+      </section>
 
 
       {/* =====================================================
@@ -665,179 +694,183 @@ export default function Certifications() {
           LEGAL DETAILS
       ====================================================== */}
 
-    <section
-  className="
-    min-h-[80vh]
-    border-t
-    border-white/10
-    bg-black
-    text-white
-    flex
-    items-center
-  "
->
-  <div
-    className="
-      mx-auto
-      w-full
-      max-w-7xl
-      px-5
-      py-10
-      sm:px-8
-      sm:py-12
-      lg:px-10
-      lg:py-14
-    "
-  >
-
-    {/* HEADER */}
-
-    <div className="mb-7 sm:mb-8">
-
-      <div className="flex items-center gap-3">
-
-        <span className="h-px w-9 bg-[#b58a3b]" />
-
-        <span
-          className="
-            text-[9px]
-            font-semibold
-            uppercase
-            tracking-[0.22em]
-            text-[#c5b49b]
-          "
-        >
-          BUSINESS INFORMATION
-        </span>
-
-      </div>
-
-      <h2
+      <section
         className="
-          mt-3
-          text-2xl
-          font-light
-          tracking-[-0.025em]
+          min-h-[80vh]
+          border-t
+          border-white/10
+          bg-black
           text-white
-          sm:text-3xl
+          flex
+          items-center
         "
       >
-        Our Legal Details
-      </h2>
-
-      <p
-        className="
-          mt-2
-          max-w-2xl
-          text-sm
-          leading-6
-          text-white/55
-        "
-      >
-        Official business and banking information for commercial
-        verification and international transactions.
-      </p>
-
-    </div>
-
-
-    {/* LEGAL CARDS */}
-
-    <div
-      className="
-        grid
-        gap-4
-        sm:grid-cols-2
-        lg:grid-cols-3
-      "
-    >
-
-      {legalDetails.map((item, index) => (
 
         <div
-          key={item.title}
           className="
-            group
-            min-h-[165px]
-            rounded-[18px]
-            border
-            border-white/10
-            bg-white
+            mx-auto
+            w-full
+            max-w-7xl
             px-5
-            py-5
-            text-[#111111]
-            shadow-[0_8px_25px_rgba(0,0,0,0.3)]
-            transition-all
-            duration-500
-            hover:-translate-y-1.5
-            hover:border-[#b58a3b]/50
-            hover:shadow-[0_18px_40px_rgba(0,0,0,0.45)]
+            py-10
+            sm:px-8
+            sm:py-12
+            lg:px-10
+            lg:py-14
           "
-          style={{
-            animationDelay: `${index * 70}ms`,
-          }}
         >
 
-          {/* ICON */}
+          {/* HEADER */}
 
-          <div
-            className="
-              mx-auto
-              flex
-              h-12
-              w-12
-              items-center
-              justify-center
-              rounded-full
-              bg-black
-              text-lg
-              text-white
-              transition-all
-              duration-500
-              group-hover:scale-105
-              group-hover:bg-[#b58a3b]
-            "
-          >
-            {item.icon}
-          </div>
+          <div className="mb-7 sm:mb-8">
+
+            <div className="flex items-center gap-3">
+
+              <span className="h-px w-9 bg-[#b58a3b]" />
+
+              <span
+                className="
+                  text-[9px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.22em]
+                  text-[#c5b49b]
+                "
+              >
+                BUSINESS INFORMATION
+              </span>
+
+            </div>
 
 
-          {/* TEXT */}
-
-          <div className="mt-4 text-center">
-
-            <h3
+            <h2
               className="
-                text-sm
-                font-semibold
-                text-[#111111]
+                mt-3
+                text-2xl
+                font-light
+                tracking-[-0.025em]
+                text-white
+                sm:text-3xl
               "
             >
-              {item.title}
-            </h3>
+              Our Legal Details
+            </h2>
+
 
             <p
               className="
-                mt-1.5
-                break-words
-                text-xs
-                leading-5
-                text-[#777777]
+                mt-2
+                max-w-2xl
+                text-sm
+                leading-6
+                text-white/55
               "
             >
-              {item.value}
+              Official business and banking information for commercial
+              verification and international transactions.
             </p>
+
+          </div>
+
+
+          {/* LEGAL CARDS */}
+
+          <div
+            className="
+              grid
+              gap-4
+              sm:grid-cols-2
+              lg:grid-cols-3
+            "
+          >
+
+            {legalDetails.map((item, index) => (
+
+              <div
+                key={item.title}
+                className="
+                  group
+                  min-h-[165px]
+                  rounded-[18px]
+                  border
+                  border-white/10
+                  bg-white
+                  px-5
+                  py-5
+                  text-[#111111]
+                  shadow-[0_8px_25px_rgba(0,0,0,0.3)]
+                  transition-all
+                  duration-500
+                  hover:-translate-y-1.5
+                  hover:border-[#b58a3b]/50
+                  hover:shadow-[0_18px_40px_rgba(0,0,0,0.45)]
+                "
+                style={{
+                  animationDelay: `${index * 70}ms`,
+                }}
+              >
+
+                {/* ICON */}
+
+                <div
+                  className="
+                    mx-auto
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-black
+                    text-lg
+                    text-white
+                    transition-all
+                    duration-500
+                    group-hover:scale-105
+                    group-hover:bg-[#b58a3b]
+                  "
+                >
+                  {item.icon}
+                </div>
+
+
+                {/* TEXT */}
+
+                <div className="mt-4 text-center">
+
+                  <h3
+                    className="
+                      text-sm
+                      font-semibold
+                      text-[#111111]
+                    "
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p
+                    className="
+                      mt-1.5
+                      break-words
+                      text-xs
+                      leading-5
+                      text-[#777777]
+                    "
+                  >
+                    {item.value}
+                  </p>
+
+                </div>
+
+              </div>
+
+            ))}
 
           </div>
 
         </div>
 
-      ))}
-
-    </div>
-
-  </div>
-</section>
+      </section>
 
 
       {/* =====================================================
@@ -859,6 +892,7 @@ export default function Certifications() {
             backdrop-blur-md
             sm:p-5
             lg:p-8
+            select-none
           "
           onClick={closeDocument}
           role="dialog"
@@ -879,6 +913,7 @@ export default function Certifications() {
               shadow-2xl
             "
             onClick={(event) => event.stopPropagation()}
+            onContextMenu={(event) => event.preventDefault()}
           >
 
             {/* =================================================
@@ -982,7 +1017,7 @@ export default function Certifications() {
 
 
             {/* =================================================
-                PDF VIEWER
+                PDF VIEWER — DOWNLOAD/PRINT UI HIDDEN
             ================================================== */}
 
             <div
@@ -995,10 +1030,11 @@ export default function Certifications() {
                 p-2
                 sm:p-4
               "
+              onContextMenu={(event) => event.preventDefault()}
             >
 
               <iframe
-                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1`}
+                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1&statusbar=0&messages=0`}
                 title={`${selected.name} certificate`}
                 className="
                   h-full
@@ -1006,10 +1042,44 @@ export default function Certifications() {
                   border-0
                   bg-white
                   shadow-xl
+                  select-none
                 "
                 style={{
                   pointerEvents: "auto",
                 }}
+                onLoad={(event) => {
+                  /*
+                   * Attempt to disable context menu inside
+                   * same-origin PDF iframe where possible.
+                   */
+                  try {
+                    const iframeDocument =
+                      event.currentTarget.contentDocument;
+
+                    if (iframeDocument) {
+                      iframeDocument.addEventListener(
+                        "contextmenu",
+                        (e) => e.preventDefault()
+                      );
+                    }
+                  } catch {
+                    /*
+                     * Browser security may prevent access
+                     * to the PDF viewer document.
+                     */
+                  }
+                }}
+              />
+
+              {/* Invisible protection layer over iframe controls area */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-x-0
+                  top-0
+                  h-2
+                "
               />
 
             </div>

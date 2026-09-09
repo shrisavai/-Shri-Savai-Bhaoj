@@ -64,7 +64,7 @@ export default function ExportInfo() {
 
               <div className="mb-4 flex items-center gap-3">
 
-                <span className="h-px w-8 bg-[#b58a3b] sm:w-10" />
+                <span className="h-px w-8 bg-white sm:w-10" />
 
                 <span
                   className="
@@ -97,7 +97,7 @@ export default function ExportInfo() {
               >
                 Simple terms.
 
-                <span className="block font-serif text-[#806d56]">
+                <span className="block font-serif text-[#555555]">
                   Global trade.
                 </span>
               </h1>
@@ -228,7 +228,7 @@ export default function ExportInfo() {
 
                   <div className="mb-3 flex items-center gap-3">
 
-                    <span className="h-px w-8 bg-[#b58a3b] sm:w-9" />
+                    <span className="h-px w-8 bg-white sm:w-9" />
 
                     <span
                       className="
@@ -236,7 +236,7 @@ export default function ExportInfo() {
                         font-semibold
                         uppercase
                         tracking-[0.22em]
-                        text-[#b58a3b]
+                       text-white
 
                         sm:text-[10px]
                       "
@@ -261,7 +261,7 @@ export default function ExportInfo() {
                     Accepted Incoterms
                   </h2>
 
-                  <div className="mt-3 h-px w-24 bg-[#b58a3b] sm:w-32" />
+                  <div className="mt-3 h-px w-24 bg-white sm:w-32" />
 
                 </div>
 
@@ -324,7 +324,7 @@ export default function ExportInfo() {
                             w-12
                             -translate-x-1/2
                             rounded-b-full
-                            bg-[#b58a3b]
+                           bg-white
 
                             sm:w-14
                           "
@@ -463,7 +463,7 @@ export default function ExportInfo() {
 
                   <div className="mb-3 flex items-center gap-3">
 
-                    <span className="h-px w-8 bg-[#b58a3b] sm:w-9" />
+                    <span className="h-px w-8 bg-white sm:w-9" />
 
                     <span
                       className="
@@ -471,7 +471,7 @@ export default function ExportInfo() {
                         font-semibold
                         uppercase
                         tracking-[0.22em]
-                        text-[#b58a3b]
+                       text-white
 
                         sm:text-[10px]
                       "
@@ -496,7 +496,7 @@ export default function ExportInfo() {
                     Flexible Payment Options
                   </h2>
 
-                  <div className="mt-3 h-px w-32 bg-[#b58a3b] sm:w-44" />
+                  <div className="mt-3 h-px w-32 bg-white sm:w-44" />
 
                 </div>
 
@@ -556,7 +556,7 @@ export default function ExportInfo() {
                             w-14
                             -translate-x-1/2
                             rounded-b-full
-                            bg-[#b58a3b]
+                           bg-white
 
                             sm:w-16
                           "
@@ -787,7 +787,7 @@ export default function ExportInfo() {
             w-9
             origin-left
             animate-[lineGrow_0.8s_ease-out_0.2s_both]
-            bg-[#b58a3b]
+           bg-white
             sm:w-10
           "
               />
@@ -798,7 +798,7 @@ export default function ExportInfo() {
             font-bold
             uppercase
             tracking-[0.22em]
-            text-[#b58a3b]
+           text-white
             animate-[fadeIn_0.6s_ease-out_0.3s_both]
             sm:text-[10px]
           "
@@ -1169,7 +1169,7 @@ export default function ExportInfo() {
 
             <div className="mb-3 flex items-center gap-3">
 
-              <span className="h-px w-8 bg-[#b58a3b] sm:w-9" />
+              <span className="h-px w-8 bg-white sm:w-9" />
 
               <span
                 className="
@@ -1177,7 +1177,7 @@ export default function ExportInfo() {
                   font-semibold
                   uppercase
                   tracking-[0.22em]
-                  text-[#b58a3b]
+                text-white
 
                   sm:text-[10px]
                 "
