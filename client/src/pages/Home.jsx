@@ -425,7 +425,7 @@ export default function Home() {
         HERO IMAGE
     ================================================= */}
 
-    <div className="order-1 mb-4 lg:order-2 lg:mb-0">
+    <div className="order-1 mb-2 lg:order-2 lg:mb-0">
 
       <div className="relative w-full">
 
