@@ -283,6 +283,7 @@ export default function Certifications() {
                     group-hover:scale-110
                   "
                 >
+
                   <svg
                     className="h-4 w-4"
                     viewBox="0 0 24 24"
@@ -296,6 +297,7 @@ export default function Certifications() {
                       strokeLinejoin="round"
                     />
                   </svg>
+
                 </div>
 
 
@@ -806,7 +808,7 @@ export default function Certifications() {
 
 
       {/* =====================================================
-          PDF LIGHTBOX
+          PDF VIEWER
       ====================================================== */}
 
       {selected && (
@@ -826,6 +828,7 @@ export default function Certifications() {
             lg:p-8
           "
           onClick={closeDocument}
+          onContextMenu={(event) => event.preventDefault()}
           role="dialog"
           aria-modal="true"
           aria-label={`${selected.name} viewer`}
@@ -846,7 +849,9 @@ export default function Certifications() {
             onClick={(event) => event.stopPropagation()}
           >
 
-            {/* VIEWER HEADER */}
+            {/* =================================================
+                VIEWER HEADER
+            ================================================== */}
 
             <div
               className="
@@ -945,14 +950,21 @@ export default function Certifications() {
 
 
             {/* =================================================
-                PDF VIEWER
-            ================================================= */}
+                PDF VIEWER AREA
+
+                IMPORTANT:
+                - Toolbar hidden
+                - No OPEN PDF button
+                - Horizontal scrolling available
+                - Vertical scrolling available
+                - PDF stays inside this page
+            ================================================== */}
 
             <div
               className="
                 min-h-0
                 flex-1
-                overflow-hidden
+                overflow-auto
                 bg-[#d8d9da]
                 p-2
                 sm:p-4
@@ -960,29 +972,41 @@ export default function Certifications() {
               onContextMenu={(event) => event.preventDefault()}
             >
 
-              <iframe
-                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1&view=Fit`}
-                title={`${selected.name} certificate`}
+              <div
                 className="
-                  h-full
-                  w-full
-                  border-0
-                  bg-white
-                  shadow-xl
-                  pointer-events-none
-                  select-none
+                  flex
+                  min-h-full
+                  min-w-[900px]
+                  items-start
+                  justify-center
                 "
-                scrolling="yes"
-                tabIndex="-1"
-                onContextMenu={(event) => event.preventDefault()}
-              />
+              >
+
+                <iframe
+                  src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+                  title={`${selected.name} full certificate`}
+                  className="
+                    h-[1100px]
+                    w-[850px]
+                    min-w-[850px]
+                    border-0
+                    bg-white
+                    shadow-xl
+                  "
+                  style={{
+                    maxWidth: "none",
+                  }}
+                  onContextMenu={(event) => event.preventDefault()}
+                />
+
+              </div>
 
             </div>
 
 
             {/* =================================================
                 VIEWER FOOTER
-            ================================================= */}
+            ================================================== */}
 
             <div
               className="
@@ -1018,7 +1042,7 @@ export default function Certifications() {
                 </span>
 
                 <span className="mt-1 block text-xs text-black/55">
-                  Scroll vertically or horizontally to view the document.
+                  Scroll to view the document.
                 </span>
 
               </div>
