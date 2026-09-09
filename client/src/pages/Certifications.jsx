@@ -79,7 +79,7 @@ export default function Certifications() {
   ];
 
   /* =========================================================
-     CLOSE DOCUMENT
+     CLOSE VIEWER
   ========================================================= */
 
   const closeDocument = () => {
@@ -87,62 +87,25 @@ export default function Certifications() {
   };
 
   /* =========================================================
-     ESC KEY + PDF PROTECTION
+     ESC KEY
   ========================================================= */
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      /* CLOSE WITH ESC */
       if (event.key === "Escape") {
         closeDocument();
-        return;
-      }
-
-      /*
-       * BLOCK COMMON SAVE / PRINT / VIEW-SOURCE SHORTCUTS
-       * WHILE PDF IS OPEN
-       */
-      if (selected) {
-        const key = event.key.toLowerCase();
-
-        if (
-          (event.ctrlKey || event.metaKey) &&
-          ["s", "p", "u"].includes(key)
-        ) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        /* BLOCK F12 / DEVTOOLS SHORTCUTS */
-        if (
-          event.key === "F12" ||
-          ((event.ctrlKey || event.metaKey) &&
-            event.shiftKey &&
-            ["i", "j", "c"].includes(key))
-        ) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }
-    };
-
-    const handleContextMenu = (event) => {
-      if (selected) {
-        event.preventDefault();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("contextmenu", handleContextMenu);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, [selected]);
+  }, []);
 
   /* =========================================================
-     LOCK BODY SCROLL WHEN DOCUMENT IS OPEN
+     LOCK BODY SCROLL
   ========================================================= */
 
   useEffect(() => {
@@ -159,6 +122,7 @@ export default function Certifications() {
 
   return (
     <main className="min-h-screen bg-black text-white">
+
       {/* =====================================================
           INTRO — WHITE / 20VH
       ====================================================== */}
@@ -190,6 +154,7 @@ export default function Certifications() {
             {/* SMALL LABEL */}
 
             <div className="mb-3 flex items-center gap-3">
+
               <span className="h-[2px] w-8 bg-[#b58a3b]" />
 
               <span
@@ -203,6 +168,7 @@ export default function Certifications() {
               >
                 TRUST & COMPLIANCE
               </span>
+
             </div>
 
             {/* TITLE */}
@@ -245,36 +211,29 @@ export default function Certifications() {
           CERTIFICATIONS — BLACK BACKGROUND
       ====================================================== */}
 
-      <section className="min-h-[90vh] bg-black text-white">
+      <section className="bg-black text-white">
 
         <div
           className="
             mx-auto
-            flex
-            min-h-[90vh]
             max-w-7xl
-            flex-col
-            justify-center
             px-5
-            py-8
+            py-10
             sm:px-8
-            sm:py-10
+            sm:py-14
             lg:px-10
-            lg:py-12
+            lg:py-16
           "
         >
 
-          {/* =================================================
-              CERTIFICATE CARDS
-          ================================================== */}
+          {/* CARD GRID */}
 
           <div
             className="
               grid
-              gap-4
+              gap-5
               sm:grid-cols-2
               lg:grid-cols-3
-              lg:gap-5
             "
           >
 
@@ -302,15 +261,13 @@ export default function Certifications() {
                 }}
               >
 
-                {/* =================================================
-                    VERIFIED BADGE
-                ================================================== */}
+                {/* VERIFIED */}
 
                 <div
                   className="
                     absolute
-                    left-4
-                    top-4
+                    left-5
+                    top-5
                     z-10
                     flex
                     h-7
@@ -342,16 +299,14 @@ export default function Certifications() {
                 </div>
 
 
-                {/* =================================================
-                    NUMBER
-                ================================================== */}
+                {/* NUMBER */}
 
                 <div
                   className="
                     absolute
-                    right-4
-                    top-4
-                    text-[9px]
+                    right-5
+                    top-5
+                    text-[10px]
                     font-semibold
                     tracking-[0.16em]
                     text-black/25
@@ -361,29 +316,25 @@ export default function Certifications() {
                 </div>
 
 
-                {/* =================================================
-                    DOCUMENT ICON
-                ================================================== */}
+                {/* ICON */}
 
                 <div
                   className="
                     flex
-                    h-[155px]
+                    h-[210px]
                     items-center
                     justify-center
                     bg-white
-                    px-6
-                    pt-5
-                    sm:h-[165px]
-                    lg:h-[170px]
+                    px-8
+                    pt-8
                   "
                 >
 
                   <div
                     className="
                       flex
-                      h-24
-                      w-24
+                      h-32
+                      w-32
                       items-center
                       justify-center
                       rounded-full
@@ -392,21 +343,17 @@ export default function Certifications() {
                       duration-500
                       group-hover:scale-105
                       group-hover:bg-[#efede8]
-                      sm:h-28
-                      sm:w-28
                     "
                   >
 
                     <svg
                       className="
-                        h-16
-                        w-16
+                        h-20
+                        w-20
                         text-[#111111]
                         transition-transform
                         duration-500
                         group-hover:scale-105
-                        sm:h-18
-                        sm:w-18
                       "
                       viewBox="0 0 64 64"
                       fill="none"
@@ -445,19 +392,16 @@ export default function Certifications() {
                 </div>
 
 
-                {/* =================================================
-                    CARD CONTENT
-                ================================================== */}
+                {/* CONTENT */}
 
                 <div
                   className="
                     flex
-                    min-h-[190px]
+                    min-h-[225px]
                     flex-col
-                    px-5
-                    pb-5
+                    px-6
+                    pb-6
                     text-center
-                    sm:min-h-[200px]
                   "
                 >
 
@@ -465,12 +409,11 @@ export default function Certifications() {
                     className="
                       mx-auto
                       max-w-[260px]
-                      text-base
+                      text-lg
                       font-semibold
-                      leading-5
-                      tracking-[-0.01em]
+                      leading-6
+                      tracking-[-0.015em]
                       text-[#111111]
-                      sm:text-lg
                     "
                   >
                     {certificate.name}
@@ -479,14 +422,13 @@ export default function Certifications() {
 
                   <p
                     className="
-                      mt-2
-                      text-[11px]
+                      mt-3
+                      text-xs
                       leading-5
                       text-[#747a7f]
                     "
                   >
                     Issued by{" "}
-
                     <span className="font-medium text-[#42474b]">
                       {certificate.issuer}
                     </span>
@@ -496,41 +438,37 @@ export default function Certifications() {
                   <p
                     className="
                       mx-auto
-                      mt-2
+                      mt-3
                       max-w-[270px]
-                      text-[10px]
-                      leading-4
+                      text-[11px]
+                      leading-5
                       text-[#858b90]
-                      sm:text-[11px]
-                      sm:leading-5
                     "
                   >
                     {certificate.description}
                   </p>
 
 
-                  {/* =================================================
-                      VIEW BUTTON
-                  ================================================== */}
+                  {/* BUTTON */}
 
-                  <div className="mt-auto pt-4">
+                  <div className="mt-auto pt-6">
 
                     <button
                       type="button"
                       onClick={() => setSelected(certificate)}
                       className="
                         inline-flex
-                        min-w-[105px]
+                        min-w-[110px]
                         items-center
                         justify-center
                         gap-2
                         rounded-xl
                         bg-black
-                        px-5
-                        py-2.5
-                        text-xs
+                        px-6
+                        py-3
+                        text-sm
                         font-semibold
-                        !text-white
+                        text-white
                         shadow-md
                         transition-all
                         duration-300
@@ -540,15 +478,14 @@ export default function Certifications() {
                       "
                     >
 
-                      <span className="!text-white">
+                      <span>
                         View
                       </span>
 
                       <span
                         className="
-                          text-sm
+                          text-base
                           font-normal
-                          !text-white
                           transition-transform
                           duration-300
                           group-hover:translate-x-1
@@ -575,7 +512,7 @@ export default function Certifications() {
 
 
       {/* =====================================================
-          COMPLIANCE STRIP
+          COMPLIANCE STRIP — BLACK
       ====================================================== */}
 
       <section
@@ -691,38 +628,34 @@ export default function Certifications() {
 
 
       {/* =====================================================
-          LEGAL DETAILS
+          LEGAL DETAILS — BLACK BACKGROUND / WHITE CARDS
       ====================================================== */}
 
       <section
         className="
-          min-h-[80vh]
           border-t
           border-white/10
           bg-black
           text-white
-          flex
-          items-center
         "
       >
 
         <div
           className="
             mx-auto
-            w-full
             max-w-7xl
             px-5
-            py-10
+            py-12
             sm:px-8
-            sm:py-12
+            sm:py-16
             lg:px-10
-            lg:py-14
+            lg:py-20
           "
         >
 
           {/* HEADER */}
 
-          <div className="mb-7 sm:mb-8">
+          <div className="mb-8 sm:mb-10">
 
             <div className="flex items-center gap-3">
 
@@ -790,19 +723,18 @@ export default function Certifications() {
                 key={item.title}
                 className="
                   group
-                  min-h-[165px]
+                  min-h-[185px]
                   rounded-[18px]
                   border
                   border-white/10
                   bg-white
                   px-5
-                  py-5
+                  py-6
                   text-[#111111]
                   shadow-[0_8px_25px_rgba(0,0,0,0.3)]
                   transition-all
                   duration-500
-                  hover:-translate-y-1.5
-                  hover:border-[#b58a3b]/50
+                  hover:-translate-y-2
                   hover:shadow-[0_18px_40px_rgba(0,0,0,0.45)]
                 "
                 style={{
@@ -816,13 +748,13 @@ export default function Certifications() {
                   className="
                     mx-auto
                     flex
-                    h-12
-                    w-12
+                    h-14
+                    w-14
                     items-center
                     justify-center
                     rounded-full
                     bg-black
-                    text-lg
+                    text-xl
                     text-white
                     transition-all
                     duration-500
@@ -836,7 +768,7 @@ export default function Certifications() {
 
                 {/* TEXT */}
 
-                <div className="mt-4 text-center">
+                <div className="mt-5 text-center">
 
                   <h3
                     className="
@@ -874,7 +806,7 @@ export default function Certifications() {
 
 
       {/* =====================================================
-          DOCUMENT VIEWER — VIEW ONLY
+          PDF LIGHTBOX
       ====================================================== */}
 
       {selected && (
@@ -892,7 +824,6 @@ export default function Certifications() {
             backdrop-blur-md
             sm:p-5
             lg:p-8
-            select-none
           "
           onClick={closeDocument}
           role="dialog"
@@ -913,12 +844,9 @@ export default function Certifications() {
               shadow-2xl
             "
             onClick={(event) => event.stopPropagation()}
-            onContextMenu={(event) => event.preventDefault()}
           >
 
-            {/* =================================================
-                VIEWER HEADER
-            ================================================== */}
+            {/* VIEWER HEADER */}
 
             <div
               className="
@@ -1017,12 +945,11 @@ export default function Certifications() {
 
 
             {/* =================================================
-                PDF VIEWER — DOWNLOAD/PRINT UI HIDDEN
-            ================================================== */}
+                PDF VIEWER
+            ================================================= */}
 
             <div
               className="
-                relative
                 min-h-0
                 flex-1
                 overflow-hidden
@@ -1034,7 +961,7 @@ export default function Certifications() {
             >
 
               <iframe
-                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1&statusbar=0&messages=0`}
+                src={`${selected.file}#toolbar=0&navpanes=0&scrollbar=1&view=Fit`}
                 title={`${selected.name} certificate`}
                 className="
                   h-full
@@ -1042,44 +969,12 @@ export default function Certifications() {
                   border-0
                   bg-white
                   shadow-xl
+                  pointer-events-none
                   select-none
                 "
-                style={{
-                  pointerEvents: "auto",
-                }}
-                onLoad={(event) => {
-                  /*
-                   * Attempt to disable context menu inside
-                   * same-origin PDF iframe where possible.
-                   */
-                  try {
-                    const iframeDocument =
-                      event.currentTarget.contentDocument;
-
-                    if (iframeDocument) {
-                      iframeDocument.addEventListener(
-                        "contextmenu",
-                        (e) => e.preventDefault()
-                      );
-                    }
-                  } catch {
-                    /*
-                     * Browser security may prevent access
-                     * to the PDF viewer document.
-                     */
-                  }
-                }}
-              />
-
-              {/* Invisible protection layer over iframe controls area */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-x-0
-                  top-0
-                  h-2
-                "
+                scrolling="yes"
+                tabIndex="-1"
+                onContextMenu={(event) => event.preventDefault()}
               />
 
             </div>
@@ -1087,7 +982,7 @@ export default function Certifications() {
 
             {/* =================================================
                 VIEWER FOOTER
-            ================================================== */}
+            ================================================= */}
 
             <div
               className="
@@ -1123,43 +1018,86 @@ export default function Certifications() {
                 </span>
 
                 <span className="mt-1 block text-xs text-black/55">
-                  Official document available for viewing only.
+                  Scroll vertically or horizontally to view the document.
                 </span>
 
               </div>
 
 
-              {/* ONLY CLOSE BUTTON — NO DOWNLOAD / OPEN BUTTON */}
+              <div className="flex flex-wrap gap-3">
 
-              <button
-                type="button"
-                onClick={closeDocument}
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  rounded-xl
-                  bg-black
-                  px-6
-                  py-3
-                  transition-all
-                  duration-300
-                  hover:bg-[#b58a3b]
-                "
-              >
+                {/* REQUEST */}
 
-                <span
+                <a
+                  href={`/contact?certificate=${encodeURIComponent(
+                    selected.name
+                  )}`}
                   className="
-                    text-[10px]
-                    font-bold
-                    tracking-[0.12em]
-                    text-white
+                    inline-flex
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-black
+                    px-5
+                    py-3
+                    no-underline
+                    transition-all
+                    duration-300
+                    hover:bg-[#b58a3b]
                   "
                 >
-                  CLOSE
-                </span>
 
-              </button>
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      tracking-[0.12em]
+                      text-white
+                    "
+                  >
+                    REQUEST A COPY →
+                  </span>
+
+                </a>
+
+
+                {/* CLOSE */}
+
+                <button
+                  type="button"
+                  onClick={closeDocument}
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    rounded-xl
+                    border
+                    border-black/20
+                    bg-[#f5f5f3]
+                    px-5
+                    py-3
+                    transition-all
+                    duration-300
+                    hover:border-black
+                    hover:bg-black
+                    hover:text-white
+                  "
+                >
+
+                  <span
+                    className="
+                      text-[10px]
+                      font-bold
+                      tracking-[0.12em]
+                      text-black
+                    "
+                  >
+                    CLOSE
+                  </span>
+
+                </button>
+
+              </div>
 
             </div>
 
